@@ -1,0 +1,19 @@
+﻿  Button.cpp
+  Main.cpp
+  MainMenuState.cpp
+d:\users\mateusz\desktop\shell\mainmenustate.cpp(26): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Shell.cpp
+  State.cpp
+Button.obj : error LNK2001: unresolved external symbol "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B)
+Button.obj : error LNK2001: unresolved external symbol "public: static class sf::Color const sf::Color::White" (?White@Color@sf@@2V12@B)
+Button.obj : error LNK2001: unresolved external symbol "public: static class sf::Color const sf::Color::Red" (?Red@Color@sf@@2V12@B)
+MainMenuState.obj : error LNK2001: unresolved external symbol "public: static class sf::Color const sf::Color::Blue" (?Blue@Color@sf@@2V12@B)
+D:\Users\Mateusz\Desktop\Shell\x64\Release\Shell.exe : fatal error LNK1120: 4 unresolved externals

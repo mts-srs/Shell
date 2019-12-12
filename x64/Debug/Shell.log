@@ -1,0 +1,27 @@
+﻿  CommunicationState.cpp
+  ControlPanelState.cpp
+  CreateFileInput.cpp
+  CreateProcessInput.cpp
+  DeleteFileInput.cpp
+  DeleteProcessInput.cpp
+  DiscState.cpp
+  FileManagerState.cpp
+  HelpState.cpp
+  Main.cpp
+  MainMenuState.cpp
+  OverwriteFileInput.cpp
+  ProcessSchedulingState.cpp
+  ProcessesManagementState.cpp
+  ProgramsState.cpp
+  RAMState.cpp
+  RenameFileInput.cpp
+  Shell.cpp
+  TimeBar.cpp
+d:\users\mateusz\desktop\shell\timebar.cpp(34): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.18362.0\ucrt\time.h(476): note: see declaration of 'ctime'
+  VMState.cpp
+  Generating Code...
+  Compiling...
+  WriteFileInput.cpp
+  Generating Code...
+  Shell.vcxproj -> D:\Users\Mateusz\Desktop\Shell\x64\Debug\Shell.exe

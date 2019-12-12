@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{709cdaba-359e-4968-87b4-9d6a2ad79838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\ControlPanelStates">
+      <UniqueIdentifier>{dc7f0a56-b83d-4eb1-93a0-b5d7cc6edae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\MainMenuStates">
+      <UniqueIdentifier>{a52ceded-2855-4ad5-93ad-aeb66502b92f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs">
+      <UniqueIdentifier>{cae716c3-b07a-4cf5-82de-b9c22875db6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\Programs">
+      <UniqueIdentifier>{b14a52ac-293f-4702-a74d-ff2e37d6c39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\FileManager">
+      <UniqueIdentifier>{744081c0-7db9-432c-83c3-7911837012be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel">
+      <UniqueIdentifier>{91915f91-b0a9-4be0-aad3-38a350897288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\VM">
+      <UniqueIdentifier>{9f7a8922-be70-4de3-b1b5-33d49836e3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\RAM">
+      <UniqueIdentifier>{29836d99-6c59-4463-9596-e328c21c9d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\Communication">
+      <UniqueIdentifier>{45e96e0e-5c02-4f46-933b-8680d35a72b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\Semafors">
+      <UniqueIdentifier>{0db29718-c1bc-4fac-92e1-8802c8f26148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\Disc">
+      <UniqueIdentifier>{f2febf98-cc8f-4ea6-a0b2-ab0add641322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\Process_scheduling">
+      <UniqueIdentifier>{5cc5c70d-df0f-4928-8003-4e255fe1ea86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\Processes_management">
+      <UniqueIdentifier>{e2b0a2c7-ae7c-405f-b6f8-2daa4ba8a7c4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VMState.cpp">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlPanelState.cpp">
+      <Filter>States\MainMenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManagerState.cpp">
+      <Filter>States\MainMenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="HelpState.cpp">
+      <Filter>States\MainMenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgramsState.cpp">
+      <Filter>States\MainMenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="RAMState.cpp">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+    <ClCompile Include="InputField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscState.cpp">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CommunicationState.cpp">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateProcessInput.cpp">
+      <Filter>States\Inputs\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteFileInput.cpp">
+      <Filter>States\Inputs\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateFileInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteProcessInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="OverwriteFileInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenameFileInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteFileInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessesManagementState.cpp">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessSchedulingState.cpp">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VMState.h">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlPanelState.h">
+      <Filter>States\MainMenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManagerState.h">
+      <Filter>States\MainMenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpState.h">
+      <Filter>States\MainMenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgramsState.h">
+      <Filter>States\MainMenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="RAMState.h">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscState.h">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CommunicationState.h">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+    <ClInclude Include="InputField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateProcessInput.h">
+      <Filter>States\Inputs\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteFileInput.h">
+      <Filter>States\Inputs\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateFileInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteProcessInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="OverwriteFileInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="RenameFileInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteFileInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessesManagementState.h">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessSchedulingState.h">
+      <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

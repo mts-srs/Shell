@@ -1,0 +1,127 @@
+#include "InputField.h"
+
+InputField::InputField(sf::Font * font, sf::Event * event)
+{
+	this->shape1.setPosition(sf::Vector2f(50, 400));
+	this->shape1.setSize(sf::Vector2f(900, 100));
+	this->shape1.setFillColor(sf::Color::White);
+
+	this->shape2.setPosition(sf::Vector2f(75, 450));
+	this->shape2.setSize(sf::Vector2f(850, 25));
+	this->shape1.setFillColor(sf::Color(215, 206, 191));
+
+	this->event = event;
+	this->font = font;
+	this->mainText.setString("Type here your text or number:");
+	this->text.setFont(*this->font);
+	this->text.setFillColor(sf::Color::Black);
+	this->text.setCharacterSize(20);
+	this->text.setPosition(75, 450);
+
+	this->mainText.setString("Type here your text or number:");
+	this->mainText.setFont(*this->font);
+	this->mainText.setFillColor(sf::Color::Black);
+	this->mainText.setCharacterSize(20);
+	this->mainText.setPosition(75, 425);
+}
+
+InputField::~InputField()
+{
+	std::cout << "ImputField deleted";
+}
+
+/*void InputField::update() 
+{
+	if (event->type == sf::Event::TextEntered) {
+		time += clock.getElapsedTime().asSeconds();
+
+		//domyœlnie x = 0.5, isFirstCharacter = true
+
+		if (isFirstCharacter == true) {
+			
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && input.size() != 0) {
+					input.pop_back();
+					clock.restart();
+					time = 0;
+				}
+				else if (event->text.unicode < 128 && event->text.unicode > 10) {
+					input += event->text.unicode;
+					clock.restart();
+					time = 0;
+				}
+			
+			isFirstCharacter = false;
+			x = 0.5;
+			//po pierwszej, zmieniamy, ¿e zosta³a wpisana pierwsza, ale do nastêpnej czekamy 0.5s
+		}
+		else if (time > x) {
+			
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && input.size() != 0) {
+					input.pop_back();
+					clock.restart();
+					time = 0;
+				}
+				else if (event->text.unicode < 128 && event->text.unicode > 10) {
+					input += event->text.unicode;
+					clock.restart();
+					time = 0;
+				}
+			
+			x = 0.2;
+			//po nastêpnej, zmieniamy, ¿e zosta³a wpisana nastêpna i do ka¿dej nast. ju¿ czekamy 0.2s
+		}
+
+		// Tutaj reszta kodu z backspace itd.
+	}
+	else {
+		isFirstCharacter = true;
+		x = 0.5;
+	}
+		text.setString(input);
+}*/
+
+void InputField::update()
+{
+	if (event->type == sf::Event::TextEntered)
+	{
+		time += clock.getElapsedTime().asSeconds();
+		
+		if (time > x) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && input.size() != 0) {
+				input.pop_back();
+				clock.restart();
+				time = 0;
+			}
+			else if (event->text.unicode < 128 && event->text.unicode > 10) {
+				input += event->text.unicode;
+				clock.restart();
+				time = 0;
+			}
+
+			if (event->type == sf::Event::KeyPressed) {
+				x = 0.2f;
+			}
+			else {
+				x = 0.5f;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+				//std::cout << input;
+				vec.push_back(input);
+				keycounter++;
+				input = "";
+			}
+		}
+		
+	}
+
+	text.setString(input);
+}
+
+
+void InputField::render(sf::RenderTarget *target)
+{
+	target->draw(this->shape1);
+	target->draw(this->shape2);
+	target->draw(this->text);
+	target->draw(this->mainText);
+}
