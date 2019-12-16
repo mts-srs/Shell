@@ -1,12 +1,12 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 
 extern bool isMousePressed;
 
 class HelpState :
-	public State
+	public GUIState
 {
 private:
 	//variables
@@ -22,7 +22,7 @@ private:
 	void initButtons();
 
 public:
-	HelpState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	HelpState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~HelpState();
 
 	//Functions

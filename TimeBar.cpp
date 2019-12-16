@@ -5,18 +5,18 @@ TimeBar::TimeBar(float width, float height, sf::Font * font, std::string text)
 {
 	
 	this->shape.setSize(sf::Vector2f(width, height));
-	this->shape.setFillColor(sf::Color(215, 206, 191));
+	this->shape.setFillColor(sf::Color(162, 162, 162, 129));
 
 	this->font = font;
 	this->text1.setFont(*this->font);
 	this->text1.setString(text);
-	this->text1.setFillColor(sf::Color::Black);
+	this->text1.setFillColor(sf::Color::White);
 	this->text1.setCharacterSize(20);
 	this->text1.setPosition(25, 25);
 
 	this->text2.setFont(*this->font);
 	this->text2.setString(this->actualTime);
-	this->text2.setFillColor(sf::Color::Black);
+	this->text2.setFillColor(sf::Color::White);
 	this->text2.setCharacterSize(20);
 	this->text2.setPosition(405, 25);
 }
@@ -34,10 +34,6 @@ void TimeBar::getActualTime()
 	ss << std::ctime(&end_time);
 	actualTime = ss.str();
 	this->text2.setString(actualTime);
-}
-
-void TimeBar::update(sf::Vector2f mousePos)
-{
 }
 
 void TimeBar::render(sf::RenderTarget * target)

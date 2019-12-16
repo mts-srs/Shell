@@ -1,5 +1,5 @@
 #pragma once
-#include"MainMenuState.h"
+#include"InitState.h"
 
 extern bool isMousePressed;
 
@@ -9,12 +9,11 @@ private:
 	//Variables
 	sf::RenderWindow *window;
 	sf::Event sfevent;
-	std::vector<sf::VideoMode> videoModes;
 
 	sf::Clock dtClock;
 	float dt;
 
-	std::stack<State*> states;
+	std::stack<GUIState*> states;
 
 	//Initialization
 	void initWindow();

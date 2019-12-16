@@ -1,22 +1,26 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 #include "InputField.h"
+#include "helpState.h"
 
 extern bool isMousePressed;
 
 class WriteFileInput :
-	public State
+	public GUIState
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Type name");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Type name, file, priority");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;
 	std::map<std::string, Button*> buttons;
 	InputField input = InputField(&font, event);
+	sf::RectangleShape menu1;
+	sf::RectangleShape menu2;
+	sf::Texture menutexture;
 
 
 	//Functions
@@ -25,7 +29,7 @@ private:
 	void initButtons();
 
 public:
-	WriteFileInput(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	WriteFileInput(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~WriteFileInput();
 
 	//Functions

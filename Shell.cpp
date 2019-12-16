@@ -5,8 +5,6 @@
 void Shell::initWindow()
 {
 	std::ifstream ifs("Config/Window.ini");
-	this->videoModes = sf::VideoMode::getFullscreenModes();
-
 	sf::VideoMode window_bounds(800, 600);
 	bool fullscreen = false;
 	std::string title = "None";
@@ -30,7 +28,7 @@ void Shell::initWindow()
 
 void Shell::initStates()
 {
-	this->states.push(new MainMenuState(this->window, &this->states, &this->sfevent));
+	this->states.push(new InitState(this->window, &this->states, &this->sfevent));
 }
 
 Shell::Shell()

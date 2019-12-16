@@ -12,6 +12,14 @@ void ControlPanelState::initBackground()
 
 	this->texture.loadFromFile("Resources/images/MMBackground.png");
 	this->background.setTexture(&texture);
+
+	this->menutexture.loadFromFile("Resources/Images/menu.png");
+	this->menu1.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu1.setTexture(&menutexture);
+	this->menu1.setPosition(sf::Vector2f(120.f, 200.f));
+	this->menu2.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu2.setTexture(&menutexture);
+	this->menu2.setPosition(sf::Vector2f(370.f, 200.f));
 }
 
 void ControlPanelState::initFonts()
@@ -24,22 +32,26 @@ void ControlPanelState::initFonts()
 
 void ControlPanelState::initButtons()
 {
-	this->buttons["HELP"] = new Button(900, 750, 50, 50, &this->font, "Help", event);
-	this->buttons["STEP"] = new Button(950, 750, 50, 50, &this->font, "Step", event);
-	this->buttons["BACK"] = new Button(0, 750, 50, 50, &this->font, "Back", event);
+	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
+	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
 
-	this->buttons["VM"] = new Button(100, 100, 200, 100, &this->font, "VM", event);
-	this->buttons["RAM"] = new Button(600, 100, 200, 100, &this->font, "RAM", event);
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
 
-	this->buttons["DISC"] = new Button(100, 250, 200, 100, &this->font, "Disc", event);
-	this->buttons["PROCSCHE"] = new Button(600, 250, 200, 100, &this->font, "Process scheduling", event); //pjoter
+	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
+	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
+	this->buttons["CONTROL_PANEL"] = new Button(130, 450, 244, 44, &this->font, "Control panel");
 
-	this->buttons["COMMUNICATION"] = new Button(100, 400, 200, 100, &this->font, "Communication", event);
-	this->buttons["PROCMANA"] = new Button(600, 400, 200, 100, &this->font, "Processes management", event); //eryk
+	this->buttons["VM"] = new Button(380, 230, 244, 44, &this->font, "VM");
+	this->buttons["RAM"] = new Button(380, 280, 244, 44, &this->font, "RAM");
+	this->buttons["DISC"] = new Button(380, 330, 244, 44, &this->font, "Disc");
+	this->buttons["PROCSCHE"] = new Button(380, 380, 244, 44, &this->font, "Process scheduling");
+	this->buttons["COMMUNICATION"] = new Button(380, 430, 244, 44, &this->font, "Communication");
+	this->buttons["PROCMANA"] = new Button(380, 480, 244, 44, &this->font, "Processes management");
 }
 
-ControlPanelState::ControlPanelState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event)
-	:State(window, states, event)
+ControlPanelState::ControlPanelState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
+	:GUIState(window, states, event)
 {
 	this->initFonts();
 	this->initButtons();
@@ -81,6 +93,30 @@ void ControlPanelState::updateButtons()
 	//updating buttons and does all funcionality
 	for (auto &it : this->buttons) {
 		it.second->update(this->mousePosView);
+	}
+
+	if (this->buttons["LOGO"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["PROGRAMS"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["CONTROL_PANEL"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["FILE_MANAGER"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
 	}
 
 	if (this->buttons["HELP"]->isPressed() && isMousePressed == false)
@@ -126,10 +162,9 @@ void ControlPanelState::updateButtons()
 	}
 
 	//Quiting shell
-	if (this->buttons["BACK"]->isPressed() && isMousePressed == false) {
-		isMousePressed = true;
-		this->states->pop();
-		system("cls");
+	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
+	{
+		this->window->close();
 	}
 
 }
@@ -153,8 +188,10 @@ void ControlPanelState::render(sf::RenderTarget* target)
 	}
 
 	target->draw(this->background);
-	this->renderButtons(target);
+	target->draw(this->menu1);
+	target->draw(this->menu2);
 	this->timebar.render(target);
+	this->renderButtons(target);
 
 	//Only for tests, remove later
 	/*sf::Text mouseText;

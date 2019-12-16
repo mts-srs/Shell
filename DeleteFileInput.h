@@ -1,13 +1,14 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 #include "InputField.h"
+#include "helpState.h"
 
 extern bool isMousePressed;
 
 class DeleteFileInput :
-	public State
+	public GUIState
 {
 private:
 	//variables
@@ -17,6 +18,9 @@ private:
 	sf::RectangleShape background;
 	std::map<std::string, Button*> buttons;
 	InputField input = InputField(&font, event);
+	sf::RectangleShape menu1;
+	sf::RectangleShape menu2;
+	sf::Texture menutexture;
 
 
 	//Functions
@@ -25,7 +29,7 @@ private:
 	void initButtons();
 
 public:
-	DeleteFileInput(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	DeleteFileInput(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~DeleteFileInput();
 
 	//Functions

@@ -12,6 +12,14 @@ void FileManagerState::initBackground()
 
 	this->texture.loadFromFile("Resources/images/MMBackground.png");
 	this->background.setTexture(&texture);
+
+	this->menutexture.loadFromFile("Resources/Images/menu.png");
+	this->menu1.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu1.setTexture(&menutexture);
+	this->menu1.setPosition(sf::Vector2f(120.f, 200.f));
+	this->menu2.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu2.setTexture(&menutexture);
+	this->menu2.setPosition(sf::Vector2f(370.f, 200.f));
 }
 
 void FileManagerState::initFonts()
@@ -24,19 +32,25 @@ void FileManagerState::initFonts()
 
 void FileManagerState::initButtons()
 {
-	this->buttons["HELP"] = new Button(900, 750, 50, 50, &this->font, "Help", event);
-	this->buttons["STEP"] = new Button(950, 750, 50, 50, &this->font, "Step", event);
-	this->buttons["BACK"] = new Button(0, 750, 50, 50, &this->font, "Back", event);
+	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
+	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+
+	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
+	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
+	this->buttons["CONTROL_PANEL"] = new Button(130, 450, 244, 44, &this->font, "Control panel");
 	
-	this->buttons["CREATE_FILE"] = new Button(350, 100, 300, 100, &this->font, "Create file", event);
-	this->buttons["DELETE_FILE"] = new Button(350, 250, 300, 100, &this->font, "Delete file", event);
-	this->buttons["RENAME_FILE"] = new Button(350, 400, 300, 100, &this->font, "Rename file", event);
-	this->buttons["WRITE_TO_FILE"] = new Button(350, 550, 300, 100, &this->font, "Write to file", event);
-	this->buttons["OVERWRITE_FILE"] = new Button(350, 700, 300, 100, &this->font, "Overwrite file", event);
+	this->buttons["CREATE_FILE"] = new Button(380, 250, 244, 44, &this->font, "Create file");
+	this->buttons["DELETE_FILE"] = new Button(380, 300, 244, 44, &this->font, "Delete file");
+	this->buttons["RENAME_FILE"] = new Button(380, 350, 244, 44, &this->font, "Rename file");
+	this->buttons["WRITE_TO_FILE"] = new Button(380, 400, 244, 44, &this->font, "Write to file");
+	this->buttons["OVERWRITE_FILE"] = new Button(380, 450, 244, 44, &this->font, "Overwrite file");
 }
 
-FileManagerState::FileManagerState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event)
-	:State(window, states, event)
+FileManagerState::FileManagerState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
+	:GUIState(window, states, event)
 {
 	this->initFonts();
 	this->initButtons();
@@ -79,6 +93,30 @@ void FileManagerState::updateButtons()
 		it.second->update(this->mousePosView);
 	}
 
+	if (this->buttons["LOGO"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["PROGRAMS"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["CONTROL_PANEL"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["FILE_MANAGER"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
 	if (this->buttons["CREATE_FILE"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
@@ -116,11 +154,9 @@ void FileManagerState::updateButtons()
 	}
 
 	//Quiting shell
-	if (this->buttons["BACK"]->isPressed() && isMousePressed == false)
+	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
 	{
-		isMousePressed = true;
-		this->states->pop();
-		system("cls");
+		this->window->close();
 	}
 
 }
@@ -144,8 +180,10 @@ void FileManagerState::render(sf::RenderTarget* target)
 	}
 
 	target->draw(this->background);
-	this->renderButtons(target);
+	target->draw(this->menu1);
+	target->draw(this->menu2);
 	this->timebar.render(target);
+	this->renderButtons(target);
 
 	//Only for tests, remove later
 /*//Only for tests, remove later

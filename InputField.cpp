@@ -2,27 +2,29 @@
 
 InputField::InputField(sf::Font * font, sf::Event * event)
 {
-	this->shape1.setPosition(sf::Vector2f(50, 400));
-	this->shape1.setSize(sf::Vector2f(900, 100));
-	this->shape1.setFillColor(sf::Color::White);
+	this->t1.loadFromFile("Resources/Images/textBackground.png");
+	this->t2.loadFromFile("Resources/Images/textForeground.png");
 
-	this->shape2.setPosition(sf::Vector2f(75, 450));
-	this->shape2.setSize(sf::Vector2f(850, 25));
-	this->shape1.setFillColor(sf::Color(215, 206, 191));
+	this->shape1.setPosition(sf::Vector2f(200, 600));
+	this->shape1.setSize(sf::Vector2f(578, 95));
+	this->shape1.setTexture(&t1);
+
+	this->shape2.setPosition(sf::Vector2f(230, 630));
+	this->shape2.setSize(sf::Vector2f(518, 36));
+	this->shape2.setTexture(&t2);
 
 	this->event = event;
 	this->font = font;
-	this->mainText.setString("Type here your text or number:");
 	this->text.setFont(*this->font);
 	this->text.setFillColor(sf::Color::Black);
 	this->text.setCharacterSize(20);
-	this->text.setPosition(75, 450);
+	this->text.setPosition(230, 630);
 
 	this->mainText.setString("Type here your text or number:");
 	this->mainText.setFont(*this->font);
 	this->mainText.setFillColor(sf::Color::Black);
 	this->mainText.setCharacterSize(20);
-	this->mainText.setPosition(75, 425);
+	this->mainText.setPosition(230, 600);
 }
 
 InputField::~InputField()
@@ -106,6 +108,7 @@ void InputField::update()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 				//std::cout << input;
+				input.pop_back();
 				vec.push_back(input);
 				keycounter++;
 				input = "";

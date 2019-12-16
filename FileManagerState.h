@@ -1,5 +1,5 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 #include "HelpState.h"
@@ -12,7 +12,7 @@
 extern bool isMousePressed;
 
 class FileManagerState :
-	public State
+	public GUIState
 {
 private:
 	//variables
@@ -21,6 +21,9 @@ private:
 	sf::Font font;
 	sf::RectangleShape background;
 	std::map<std::string, Button*> buttons;
+	sf::RectangleShape menu1;
+	sf::RectangleShape menu2;
+	sf::Texture menutexture;
 
 	//Functions
 	void initBackground();
@@ -28,7 +31,7 @@ private:
 	void initButtons();
 
 public:
-	FileManagerState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	FileManagerState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~FileManagerState();
 
 	//Functions

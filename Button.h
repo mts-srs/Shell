@@ -17,7 +17,6 @@ private:
 	sf::RectangleShape shape;
 	sf::Font* font;
 	sf::Text text;
-	sf::Event *event;
 
 	sf::Texture idleTexture;
 	sf::Texture hoverTexture;
@@ -25,7 +24,9 @@ private:
 
 public:
 	Button(float x, float y, float width, float height, sf::Font* font,
-		std::string text, sf::Event *event);
+		std::string text, std::string tnormal,
+		std::string thover, std::string tactive);
+	Button(float x, float y, float width, float height, sf::Font * font, std::string text);
 	virtual ~Button();
 
 	//Accessors

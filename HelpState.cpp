@@ -24,14 +24,15 @@ void HelpState::initFonts()
 
 void HelpState::initButtons()
 {
-	this->buttons["STEP"] = new Button(950, 750, 50, 50, &this->font, "Step", event);
-	this->buttons["BACK"] = new Button(0, 750, 50, 50, &this->font, "Back", event);
+	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
+	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
 
 
 }
 
-HelpState::HelpState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event)
-	:State(window, states, event)
+HelpState::HelpState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
+	:GUIState(window, states, event)
 {
 
 	this->initFonts();
@@ -77,11 +78,6 @@ void HelpState::updateButtons()
 	}
 
 	//Quiting shell
-	if (this->buttons["BACK"]->isPressed() && isMousePressed == false) {
-		isMousePressed = true;
-		this->states->pop();
-		system("cls");
-	}
 
 }
 
@@ -104,8 +100,8 @@ void HelpState::render(sf::RenderTarget* target)
 	}
 
 	target->draw(this->background);
-	this->renderButtons(target);
 	this->timebar.render(target);
+	this->renderButtons(target);
 
 	//Only for tests, remove later
 /*//Only for tests, remove later

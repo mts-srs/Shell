@@ -10,6 +10,8 @@ class InputField
 private:
 	sf::RectangleShape shape1;
 	sf::RectangleShape shape2;
+	sf::Texture t1;
+	sf::Texture t2;
 	sf::Font* font;
 	std::string input;
 	sf::Text text;

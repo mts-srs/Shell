@@ -1,5 +1,5 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 #include "HelpState.h"
@@ -8,15 +8,19 @@ extern bool isMousePressed;
 
 
 class CommunicationState :
-	public State
+	public GUIState
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Disc");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;
 	std::map<std::string, Button*> buttons;
+	sf::RectangleShape menu1;
+	sf::RectangleShape menu2;
+	sf::RectangleShape menu3;
+	sf::Texture menutexture;
 
 	//Functions
 	void initBackground();
@@ -24,7 +28,7 @@ private:
 	void initButtons();
 
 public:
-	CommunicationState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	CommunicationState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~CommunicationState();
 
 	//Functions

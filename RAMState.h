@@ -1,22 +1,29 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 #include "HelpState.h"
+#include "RAMInput.h"
+#include "RAMMessageInput.h"
+#include "RAMProcessInput.h"
+#include "RAMSegmentInput.h"
 
 extern bool isMousePressed;
 
-
 class RAMState :
-	public State
+	public GUIState
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "RAM");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;
 	std::map<std::string, Button*> buttons;
+	sf::RectangleShape menu1;
+	sf::RectangleShape menu2;
+	sf::RectangleShape menu3;
+	sf::Texture menutexture;
 
 	//Functions
 	void initBackground();
@@ -24,7 +31,7 @@ private:
 	void initButtons();
 
 public:
-	RAMState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	RAMState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~RAMState();
 
 	//Functions

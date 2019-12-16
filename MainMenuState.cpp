@@ -12,6 +12,11 @@ void MainMenuState::initBackground()
 
 	this->texture.loadFromFile("Resources/images/MMBackground.png");
 	this->background.setTexture(&texture);
+
+	this->menutexture.loadFromFile("Resources/Images/menu.png");
+	this->menu1.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu1.setTexture(&menutexture);
+	this->menu1.setPosition(sf::Vector2f(120.f , 200.f));
 }
 
 void MainMenuState::initFonts()
@@ -24,17 +29,19 @@ void MainMenuState::initFonts()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["HELP"] = new Button(900, 750, 50, 50, &this->font, "Help", event);
-	this->buttons["STEP"] = new Button(950, 750, 50, 50, &this->font, "Step", event);
+	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
+	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
 
-	this->buttons["PROGRAMS"] = new Button(350, 100, 300, 100, &this->font, "Programs", event);
-	this->buttons["FILE_MANAGER"] = new Button(350, 250, 300, 100, &this->font, "File manager", event);
-	this->buttons["CONTROL_PANEL"] = new Button(350, 400, 300, 100, &this->font, "Control panel", event);
-	this->buttons["EXIT"] = new Button(350, 550, 300, 100, &this->font, "Quit", event);
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+
+	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
+	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
+	this->buttons["CONTROL_PANEL"] = new Button(130, 450, 244, 44, &this->font, "Control panel");
 }
 
-MainMenuState::MainMenuState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event)
-	:State(window, states, event)
+MainMenuState::MainMenuState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
+	:GUIState(window, states, event)
 {
 	this->initFonts();
 	this->initButtons();
@@ -78,6 +85,12 @@ void MainMenuState::updateButtons()
 		it.second->update(this->mousePosView);
 	}
 
+	if (this->buttons["LOGO"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
 	if (this->buttons["HELP"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
@@ -87,8 +100,6 @@ void MainMenuState::updateButtons()
 	if (this->buttons["PROGRAMS"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		// && event->type == sf::Event::MouseButtonReleased
-		std::cout << "PROBA RAZ DWA CZY";
 		this->states->push(new ProgramsState(this->window, this->states, this->event));
 	}
 
@@ -107,10 +118,8 @@ void MainMenuState::updateButtons()
 	//Quiting shell
 	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
 	{
-		isMousePressed = true;
-		this->quit = true;	
+		this->window->close();
 	}
-
 }
 
 void MainMenuState::updateTimebar()
@@ -132,8 +141,9 @@ void MainMenuState::render(sf::RenderTarget* target)
 	}
 
 	target->draw(this->background);
-	this->renderButtons(target);
+	target->draw(this->menu1);
 	this->timebar.render(target);
+	this->renderButtons(target);
 
 	//Only for tests, remove later
 	/*//Only for tests, remove later

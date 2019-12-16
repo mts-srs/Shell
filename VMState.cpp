@@ -12,32 +12,55 @@ void VMState::initBackground()
 
 	this->texture.loadFromFile("Resources/images/MMBackground.png");
 	this->background.setTexture(&texture);
+
+	this->menutexture.loadFromFile("Resources/Images/menu.png");
+	this->menu1.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu1.setTexture(&menutexture);
+	this->menu1.setPosition(sf::Vector2f(120.f, 200.f));
+	this->menu2.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu2.setTexture(&menutexture);
+	this->menu2.setPosition(sf::Vector2f(370.f, 200.f));
+	this->menu3.setSize(sf::Vector2f(256.f, 349.f));
+	this->menu3.setTexture(&menutexture);
+	this->menu3.setPosition(sf::Vector2f(620.f, 200.f));
 }
 
 void VMState::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/AppleGaramond.ttf"))
 	{
-		throw("ERROR:MainMenuState could not load font");
+		throw("ERROR:could not load font");
 	}
 }
 
 void VMState::initButtons()
 {
-	this->buttons["HELP"] = new Button(900, 750, 50, 50, &this->font, "Help", event);
-	this->buttons["STEP"] = new Button(950, 750, 50, 50, &this->font, "Step", event);
-	this->buttons["BACK"] = new Button(0, 750, 50, 50, &this->font, "Back", event);
+	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
+	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
 
-	this->buttons["PAGEFILE"] = new Button(350, 100, 300, 100, &this->font, "Pagefile", event);
-	this->buttons["SEGMENTPROCESSCONTENT"] = new Button(350, 250, 300, 100, &this->font, "Segment process content", event);
-	this->buttons["SEGMENTPROCESSTABLE"] = new Button(350, 400, 300, 100, &this->font, "Segment process table", event);
-	this->buttons["PAGEFILESEGMENTTABLE"] = new Button(350, 550, 300, 100, &this->font, "Pagefile segment table", event);
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+
+	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
+	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
+	this->buttons["CONTROL_PANEL"] = new Button(130, 450, 244, 44, &this->font, "Control panel");
+
+	this->buttons["VM"] = new Button(380, 230, 244, 44, &this->font, "VM");
+	this->buttons["RAM"] = new Button(380, 280, 244, 44, &this->font, "RAM");
+	this->buttons["DISC"] = new Button(380, 330, 244, 44, &this->font, "Disc");
+	this->buttons["PROCSCHE"] = new Button(380, 380, 244, 44, &this->font, "Process scheduling");
+	this->buttons["COMMUNICATION"] = new Button(380, 430, 244, 44, &this->font, "Communication");
+	this->buttons["PROCMANA"] = new Button(380, 480, 244, 44, &this->font, "Processes management");
+
+	this->buttons["PAGEFILE"] = new Button(630, 230, 244, 44, &this->font, "Pagefile");
+	this->buttons["SEGMENTPROCESSCONTENT"] = new Button(630, 310, 244, 44, &this->font, "Segment process content");
+	this->buttons["SEGMENTPROCESSTABLE"] = new Button(630, 390, 244, 44, &this->font, "Segment process table");
+	this->buttons["PAGEFILESEGMENTTABLE"] = new Button(630, 470, 244, 44, &this->font, "Pagefile segment table");
 }
 
-VMState::VMState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event)
-	:State(window, states, event)
+VMState::VMState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
+	:GUIState(window, states, event)
 {
-
 	this->initFonts();
 	this->initButtons();
 	this->initBackground();
@@ -75,22 +98,105 @@ void VMState::update(const float& dt)
 
 void VMState::updateButtons()
 {
+	//updating buttons and does all funcionality
+	for (auto &it : this->buttons) {
+		it.second->update(this->mousePosView);
+	}
+
+	if (this->buttons["LOGO"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["PROGRAMS"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["CONTROL_PANEL"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["FILE_MANAGER"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
 	if (this->buttons["HELP"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
 		this->states->push(new HelpState(this->window, this->states, this->event));
 	}
 
-	//updating buttons and does all funcionality
-	for (auto &it : this->buttons) {
-		it.second->update(this->mousePosView);
+	if (this->buttons["VM"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["RAM"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["DISC"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["PROCSCHE"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["COMMUNICATION"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["PROCMANA"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["PAGEFILE"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::VM.printVM();
+	}
+
+	if (this->buttons["SEGMENTPROCESSCONTENT"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->push(new PCBSegmentsInput(this->window, this->states, this->event));
+	}
+
+	if (this->buttons["SEGMENTPROCESSTABLE"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->push(new PCBSegTabInput(this->window, this->states, this->event));
+	}
+
+	if (this->buttons["PAGEFILESEGMENTTABLE"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::VM.printVMsegTab();
 	}
 
 	//Quiting shell
-	if (this->buttons["BACK"]->isPressed() && isMousePressed == false) {
-		isMousePressed = true;
-		this->states->pop();
-		system("cls");
+	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
+	{
+		this->window->close();
 	}
 
 }
@@ -114,8 +220,11 @@ void VMState::render(sf::RenderTarget* target)
 	}
 
 	target->draw(this->background);
-	this->renderButtons(target);
+	target->draw(this->menu1);
+	target->draw(this->menu2);
+	target->draw(this->menu3);
 	this->timebar.render(target);
+	this->renderButtons(target);
 
 	//Only for tests, remove later
 	/*sf::Text mouseText;

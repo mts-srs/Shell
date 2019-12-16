@@ -2,7 +2,6 @@
 
 bool isMousePressed = false;
 
-
 int main()
 {
 	Shell shell;

@@ -1,14 +1,16 @@
 #pragma once
-#include "State.h"
+#include "GUIState.h"
 #include "Button.h"
 #include "Timebar.h"
 #include "HelpState.h"
+#include "PCBSegTabInput.h"
+#include "PCBSegmentsInput.h"
 
 extern bool isMousePressed;
 
 
 class VMState :
-	public State
+	public GUIState
 {
 private:
 	//variables
@@ -17,6 +19,10 @@ private:
 	sf::Font font;
 	sf::RectangleShape background;
 	std::map<std::string, Button*> buttons;
+	sf::RectangleShape menu1;
+	sf::RectangleShape menu2;
+	sf::RectangleShape menu3;
+	sf::Texture menutexture;
 
 	//Functions
 	void initBackground();
@@ -24,7 +30,7 @@ private:
 	void initButtons();
 
 public:
-	VMState(sf::RenderWindow *window, std::stack<State*> *states, sf::Event *event);
+	VMState(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event);
 	virtual ~VMState();
 
 	//Functions

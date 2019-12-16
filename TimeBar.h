@@ -16,14 +16,13 @@ private:
 	sf::Font* font;
 	sf::Text text1;
 	sf::Text text2;
-	std::string actualTime = "";
+	std::string actualTime;
 public:
 	TimeBar(float width, float height, sf::Font * font, std::string text);
 	virtual ~TimeBar();
 
 	//functions
 	void getActualTime();
-	void update(sf::Vector2f mousePos);
 	void render(sf::RenderTarget* target);
 };
 

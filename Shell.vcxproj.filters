@@ -43,17 +43,14 @@
     <Filter Include="States\Inputs\ControlPanel\Communication">
       <UniqueIdentifier>{45e96e0e-5c02-4f46-933b-8680d35a72b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States\Inputs\ControlPanel\Semafors">
-      <UniqueIdentifier>{0db29718-c1bc-4fac-92e1-8802c8f26148}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\Inputs\ControlPanel\Disc">
-      <UniqueIdentifier>{f2febf98-cc8f-4ea6-a0b2-ab0add641322}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\Inputs\ControlPanel\Process_scheduling">
-      <UniqueIdentifier>{5cc5c70d-df0f-4928-8003-4e255fe1ea86}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States\Inputs\ControlPanel\Processes_management">
       <UniqueIdentifier>{e2b0a2c7-ae7c-405f-b6f8-2daa4ba8a7c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{ccafaae7-7ca5-4bd3-a0cd-fe4f34799b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Inputs\ControlPanel\Drive">
+      <UniqueIdentifier>{f2febf98-cc8f-4ea6-a0b2-ab0add641322}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +90,6 @@
     <ClCompile Include="InputField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DiscState.cpp">
       <Filter>States\ControlPanelStates</Filter>
     </ClCompile>
@@ -105,13 +99,7 @@
     <ClCompile Include="CreateProcessInput.cpp">
       <Filter>States\Inputs\Programs</Filter>
     </ClCompile>
-    <ClCompile Include="DeleteFileInput.cpp">
-      <Filter>States\Inputs\Programs</Filter>
-    </ClCompile>
     <ClCompile Include="CreateFileInput.cpp">
-      <Filter>States\Inputs\FileManager</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteProcessInput.cpp">
       <Filter>States\Inputs\FileManager</Filter>
     </ClCompile>
     <ClCompile Include="OverwriteFileInput.cpp">
@@ -128,6 +116,72 @@
     </ClCompile>
     <ClCompile Include="ProcessSchedulingState.cpp">
       <Filter>States\ControlPanelStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU_Scheduling.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Files_And_Directory_Management.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Headers.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Interperter.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Interprocess_Com.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="PCB.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="RAM.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sync_Mech.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Virtual_Mem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="InitState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteProcessInput.cpp">
+      <Filter>States\Inputs\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteFileInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PCBSegTabInput.cpp">
+      <Filter>States\Inputs\ControlPanel\VM</Filter>
+    </ClCompile>
+    <ClCompile Include="PCBSegmentsInput.cpp">
+      <Filter>States\Inputs\ControlPanel\VM</Filter>
+    </ClCompile>
+    <ClCompile Include="RAMInput.cpp">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClCompile>
+    <ClCompile Include="RAMProcessInput.cpp">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClCompile>
+    <ClCompile Include="RAMSegmentInput.cpp">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClCompile>
+    <ClCompile Include="RAMMessageInput.cpp">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscQueueInput.cpp">
+      <Filter>States\Inputs\ControlPanel\Drive</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscBlockInput.cpp">
+      <Filter>States\Inputs\ControlPanel\Drive</Filter>
+    </ClCompile>
+    <ClCompile Include="PCBInput.cpp">
+      <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +215,6 @@
     <ClInclude Include="RAMState.h">
       <Filter>States\ControlPanelStates</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DiscState.h">
       <Filter>States\ControlPanelStates</Filter>
     </ClInclude>
@@ -176,13 +227,7 @@
     <ClInclude Include="CreateProcessInput.h">
       <Filter>States\Inputs\Programs</Filter>
     </ClInclude>
-    <ClInclude Include="DeleteFileInput.h">
-      <Filter>States\Inputs\Programs</Filter>
-    </ClInclude>
     <ClInclude Include="CreateFileInput.h">
-      <Filter>States\Inputs\FileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteProcessInput.h">
       <Filter>States\Inputs\FileManager</Filter>
     </ClInclude>
     <ClInclude Include="OverwriteFileInput.h">
@@ -199,6 +244,87 @@
     </ClInclude>
     <ClInclude Include="ProcessSchedulingState.h">
       <Filter>States\ControlPanelStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="arythmetics.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU_Scheduling.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Drive.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Files_And_Directory_Management.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpreter.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Interprocess_Com.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="jumps.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="PCB.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="RAM.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Register.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sync_Mech.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Virtual_Mem.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="InitState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteProcessInput.h">
+      <Filter>States\Inputs\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteFileInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PCBSegTabInput.h">
+      <Filter>States\Inputs\ControlPanel\VM</Filter>
+    </ClInclude>
+    <ClInclude Include="PCBSegmentsInput.h">
+      <Filter>States\Inputs\ControlPanel\VM</Filter>
+    </ClInclude>
+    <ClInclude Include="RAMInput.h">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClInclude>
+    <ClInclude Include="RAMProcessInput.h">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClInclude>
+    <ClInclude Include="RAMSegmentInput.h">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClInclude>
+    <ClInclude Include="RAMMessageInput.h">
+      <Filter>States\Inputs\ControlPanel\RAM</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscQueueInput.h">
+      <Filter>States\Inputs\ControlPanel\Drive</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscBlockInput.h">
+      <Filter>States\Inputs\ControlPanel\Drive</Filter>
+    </ClInclude>
+    <ClInclude Include="PCBInput.h">
+      <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
