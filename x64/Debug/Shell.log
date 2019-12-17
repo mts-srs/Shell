@@ -1,6 +1,82 @@
-﻿  CreateFileInput.cpp
+﻿  Button.cpp
+  CommunicationState.cpp
+  ControlPanelState.cpp
+  CPU_Scheduling.cpp
+  CreateFileInput.cpp
+  CreateProcessInput.cpp
   DeleteFileInput.cpp
+  DeleteProcessInput.cpp
+  DiscBlockInput.cpp
+  DiscQueueInput.cpp
+  DiscState.cpp
+  FileManagerState.cpp
+  Files_And_Directory_Management.cpp
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(273): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(346): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(377): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(411): warning C4101: 'value': unreferenced local variable
+  Headers.cpp
+  HelpState.cpp
+  InitState.cpp
+  InputField.cpp
+  Interperter.cpp
+d:\users\mateusz\desktop\shell\interperter.cpp(309): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(320): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(330): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(340): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(351): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(535): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(546): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(556): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(566): warning C4309: 'argument': truncation of constant value
+d:\users\mateusz\desktop\shell\interperter.cpp(577): warning C4309: 'argument': truncation of constant value
+  Interprocess_Com.cpp
+d:\users\mateusz\desktop\shell\interprocess_com.cpp(13): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\interprocess_com.cpp(49): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Main.cpp
+  Generating Code...
+d:\users\mateusz\desktop\shell\interperter.cpp(190): warning C4715: 'jump': not all control paths return a value
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(127): warning C4715: 'Filesystem::openFile': not all control paths return a value
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(166): warning C4715: 'Filesystem::closeFile': not all control paths return a value
+d:\users\mateusz\desktop\shell\files_and_directory_management.cpp(621): warning C4715: 'Filesystem::verify': not all control paths return a value
+  Compiling...
+  MainMenuState.cpp
   OverwriteFileInput.cpp
+  PCB.cpp
+  PCBInput.cpp
+  PCBSegmentsInput.cpp
+  PCBSegTabInput.cpp
+  ProcessesManagementState.cpp
+  ProcessSchedulingState.cpp
+  ProgramsState.cpp
+  RAM.cpp
+d:\users\mateusz\desktop\shell\ram.cpp(65): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\ram.cpp(68): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\ram.cpp(74): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\ram.cpp(94): warning C4390: ';': empty controlled statement found; is this the intent?
+d:\users\mateusz\desktop\shell\ram.cpp(168): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\ram.cpp(173): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\users\mateusz\desktop\shell\ram.cpp(236): warning C4390: ';': empty controlled statement found; is this the intent?
+  RAMInput.cpp
+  RAMMessageInput.cpp
+  RAMProcessInput.cpp
+  RAMSegmentInput.cpp
+  RAMState.cpp
   RenameFileInput.cpp
+  Shell.cpp
+  GUIState.cpp
+  Sync_Mech.cpp
+d:\users\mateusz\desktop\shell\sync_mech.cpp(43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  TimeBar.cpp
+d:\users\mateusz\desktop\shell\timebar.cpp(34): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(476): note: see declaration of 'ctime'
+  Generating Code...
+d:\users\mateusz\desktop\shell\ram.cpp(121): warning C4715: 'Ram::buddy': not all control paths return a value
+  Compiling...
+  Virtual_Mem.cpp
+d:\users\mateusz\desktop\shell\virtual_mem.cpp(68): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+d:\users\mateusz\desktop\shell\virtual_mem.cpp(159): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  VMState.cpp
+  WriteFileInput.cpp
   Generating Code...
   Shell.vcxproj -> D:\Users\Mateusz\Desktop\Shell\x64\Debug\Shell.exe
