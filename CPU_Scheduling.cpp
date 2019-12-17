@@ -193,7 +193,7 @@ void CPU_Scheduling::displayPCBqueue()
 void CPU_Scheduling::displayRunning()
 {
 	std::cout << "\n=============================================================================\n";
-	std::cout << "|||||||||||||||||||||||||||||| RUNNIG PROCESS |||||||||||||||||||||||||||||||";
+	std::cout << "|||||||||||||||||||||||||||||| RUNNING PROCESS |||||||||||||||||||||||||||||||";
 	std::cout << "\n=============================================================================\n";
 	std::cout << std::left << std::setw(6) << "|PID|" << std::right << std::setw(6) << " |Default Pri.|" << std::right << std::setw(10) << " |Dynamic Pri.|";
 	std::cout << std::right << std::setw(6) << " |State|" << std::right << std::setw(6) << " |Reg A|" << std::right << std::setw(6) << " |Reg B|" << std::right << std::setw(6) << " |Reg C|";

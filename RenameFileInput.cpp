@@ -89,11 +89,9 @@ void RenameFileInput::update(const float& dt)
 	this->updateButtons();
 
 	if (input.keycounter < 2) {
-		this->updateButtons();
 		this->updateInput();
 	}
 	else {
-		this->updateButtons();
 		System::FS.renameFile(input.vec.at(0), input.vec.at(1));
 		this->states->pop();
 	}

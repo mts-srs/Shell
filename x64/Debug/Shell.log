@@ -1,8 +1,6 @@
-﻿  ControlPanelState.cpp
-  InitState.cpp
-  Main.cpp
-  MainMenuState.cpp
-  ProcessesManagementState.cpp
-  Shell.cpp
+﻿  CreateFileInput.cpp
+  DeleteFileInput.cpp
+  OverwriteFileInput.cpp
+  RenameFileInput.cpp
   Generating Code...
   Shell.vcxproj -> D:\Users\Mateusz\Desktop\Shell\x64\Debug\Shell.exe

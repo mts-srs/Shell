@@ -89,11 +89,9 @@ void CreateFileInput::update(const float& dt)
 	this->updateButtons();
 
 	if (input.keycounter < 1) {
-		this->updateButtons();
 		this->updateInput();
 	}
 	else {
-		this->updateButtons();
 		System::FS.createFile(input.vec.at(0));
 		this->states->pop();
 	}

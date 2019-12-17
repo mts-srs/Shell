@@ -89,11 +89,9 @@ void DeleteFileInput::update(const float& dt)
 	this->updateButtons();
 
 	if (input.keycounter < 1) {
-		this->updateButtons();
 		this->updateInput();
 	}
 	else {
-		this->updateButtons();
 		System::FS.deleteFile(input.vec.at(0));
 		this->states->pop();
 	}
