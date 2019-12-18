@@ -192,6 +192,9 @@
     <ClCompile Include="PCBSemInput.cpp">
       <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shell.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="PCBSemInput.h">
       <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

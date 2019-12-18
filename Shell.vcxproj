@@ -167,6 +167,7 @@
     <ClCompile Include="Interprocess_Com.cpp" />
     <ClCompile Include="IPCSendInput.cpp" />
     <ClCompile Include="IPCShowMessageInput.cpp" />
+    <ClCompile Include="LoadingState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="OverwriteFileInput.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="IPCSendInput.h" />
     <ClInclude Include="IPCShowMessageInput.h" />
     <ClInclude Include="jumps.hpp" />
+    <ClInclude Include="LoadingState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="OverwriteFileInput.h" />
     <ClInclude Include="PCB.hpp" />

@@ -1,5 +1,5 @@
 #pragma once
-#include"InitState.h"
+#include"LoadingState.h"
 
 extern bool isMousePressed;
 

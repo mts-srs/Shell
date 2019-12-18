@@ -157,8 +157,16 @@ bool interprate(PCB *pcb) {
 	}
 	else if (command == "WF")
 	{
-		args = getArgs(pcb, 2, takenBytes);
-		ret = System::FS.writeToFile(args[0], args[1]);
+		args = getArgs(pcb, 1, takenBytes);
+		std::string tmp = "";
+		ret = System::FS.writeToFile(args[0], tmp += pcb->getRegister().getD());
+	}
+	else if (command == "RF")
+	{
+		args = getArgs(pcb, 1, takenBytes);
+		std::string tmp = "";
+		System::FS.readFile(args[0], pcb->getPid(), 1, tmp);
+		ret = MOV(pcb, "DX", tmp);
 	}
 	// SEMAFORY
 
@@ -177,10 +185,10 @@ bool interprate(PCB *pcb) {
 	if (!IC)
 		pcb->setCommandCounter(pcb->getCommandCounter() + takenBytes);
 
-	/*std::cout << "Command: " << command;
+	std::cout << "Command: " << command;
 	for (auto v : args) {
 		std::cout << " " << v;
-	}*/
+	}
 	
 	return ret;
 }

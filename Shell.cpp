@@ -29,7 +29,7 @@ void Shell::initWindow()
 
 void Shell::initStates()
 {
-	this->states.push(new InitState(this->window, &this->states, &this->sfevent));
+	this->states.push(new LoadingState(this->window, &this->states, &this->sfevent));
 }
 
 Shell::Shell()
