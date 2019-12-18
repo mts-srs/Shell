@@ -13,7 +13,7 @@ class RAMInput :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Type begin of range, end of range");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

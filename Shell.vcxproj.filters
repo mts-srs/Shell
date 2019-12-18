@@ -183,6 +183,15 @@
     <ClCompile Include="PCBInput.cpp">
       <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
     </ClCompile>
+    <ClCompile Include="IPCShowMessageInput.cpp">
+      <Filter>States\Inputs\ControlPanel\Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="IPCSendInput.cpp">
+      <Filter>States\Inputs\ControlPanel\Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="PCBSemInput.cpp">
+      <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shell.h">
@@ -324,6 +333,15 @@
       <Filter>States\Inputs\ControlPanel\Drive</Filter>
     </ClInclude>
     <ClInclude Include="PCBInput.h">
+      <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
+    </ClInclude>
+    <ClInclude Include="IPCShowMessageInput.h">
+      <Filter>States\Inputs\ControlPanel\Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="IPCSendInput.h">
+      <Filter>States\Inputs\ControlPanel\Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="PCBSemInput.h">
       <Filter>States\Inputs\ControlPanel\Processes_management</Filter>
     </ClInclude>
   </ItemGroup>

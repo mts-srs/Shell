@@ -34,19 +34,20 @@ void WriteFileInput::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/stepHover.png", "Resources/Images/stepClicked.png");
 
-	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logoHover.png", "Resources/Images/logoClicked.png");
 
 	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
 	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
 	this->buttons["CONTROL_PANEL"] = new Button(130, 450, 244, 44, &this->font, "Control panel");
 
-	this->buttons["CREATE_FILE"] = new Button(380, 250, 244, 44, &this->font, "Create file");
-	this->buttons["DELETE_FILE"] = new Button(380, 300, 244, 44, &this->font, "Delete file");
-	this->buttons["RENAME_FILE"] = new Button(380, 350, 244, 44, &this->font, "Rename file");
-	this->buttons["WRITE_TO_FILE"] = new Button(380, 400, 244, 44, &this->font, "Write to file");
-	this->buttons["OVERWRITE_FILE"] = new Button(380, 450, 244, 44, &this->font, "Overwrite file");
+	this->buttons["CREATE_FILE"] = new Button(380, 230, 244, 44, &this->font, "Create file");
+	this->buttons["DELETE_FILE"] = new Button(380, 280, 244, 44, &this->font, "Delete file");
+	this->buttons["RENAME_FILE"] = new Button(380, 330, 244, 44, &this->font, "Rename file");
+	this->buttons["WRITE_TO_FILE"] = new Button(380, 380, 244, 44, &this->font, "Write to file");
+	this->buttons["OVERWRITE_FILE"] = new Button(380, 430, 244, 44, &this->font, "Overwrite file");
+	this->buttons["READ"] = new Button(380, 480, 244, 44, &this->font, "Read from file");
 }
 
 WriteFileInput::WriteFileInput(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
@@ -162,6 +163,12 @@ void WriteFileInput::updateButtons()
 	{
 		isMousePressed = true;
 		this->states->push(new HelpState(this->window, this->states, this->event));
+	}
+
+	if (this->buttons["STEP"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::CPU.nextStep();
 	}
 
 	//Quiting shell

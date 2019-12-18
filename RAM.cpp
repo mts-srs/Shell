@@ -1,7 +1,7 @@
 #include "RAM.hpp"
 #include "Headers.h"
 
-Ram::Ram() : ramSem(1){
+Ram::Ram() {
     ram.fill(' ');
     blocks.fill(0);
     
@@ -19,6 +19,7 @@ Ram::~Ram(){}
  * @param segment Int specifing VM segment: 1 for data.
  * @param ch Character to load to RAM.
  * @param logAddr Logical address where the character is going to be saved.
+ * @return true for success or false for failure.
  */
 bool Ram::saveInRam(PCB* pcb, int segment, char ch, int logAddr) {
     if(!isInRam(pcb,segment)){
@@ -41,7 +42,7 @@ bool Ram::saveInRam(PCB* pcb, int segment, char ch, int logAddr) {
  * @return buddy function's value, true for success or false for failure.
  */
 bool Ram::loadToRam(PCB* pcb, std::string bytes, int segment) {
-    return buddy(pcb, segment, bytes, 0);
+	return buddy(pcb, segment, bytes, 0);
 }
 
 /**
@@ -91,9 +92,10 @@ bool Ram::buddy(PCB* pcb, int segment, std::string bytes, int divisionLvl) {
             if (ok) break;
         }
         if (!ok){
-            if(ramSem.wait_sem(pcb->getPid()));
+            clearRam();
 
-            return 1;
+            //return 0;
+			buddy(pcb, segment, bytes, divisionLvl);
         }
         else {
             for (int i = 0; i < fileSize; i++)
@@ -105,7 +107,7 @@ bool Ram::buddy(PCB* pcb, int segment, std::string bytes, int divisionLvl) {
                 blocks[startAddrBlocks+i] = 1;
             }
             if(segment == 2) {
-                (pcb->messages.at(pcb->messages.size())).RAMadrress =  startAddr;
+				(pcb->messages.at(pcb->messages.size() - 1)).RAMadrress = startAddr; return true;
             }
             else {
                 pcb->segTab[segment]->baseRAM = startAddr;
@@ -152,6 +154,7 @@ char Ram::readFromRam(PCB* pcb, int segment, int logAddr) {
  * @return String containing message.
  */
 std::string Ram::readMessage(int ramAddr) {
+	//printAllRam();
     int space = 0;
     std::string msg = "";
     int i = ramAddr;
@@ -164,13 +167,24 @@ std::string Ram::readMessage(int ramAddr) {
     msg.pop_back();
 
     size_t size = msg.size();
-    int numOfBlocks;
+    /*
+	int numOfBlocks;
     int num1 = size/8;
     int num2 = size%8;
     if (num2==0) numOfBlocks = num1;
     else numOfBlocks = num1+1;
+	*/
+	int blockSize;
+	int numOfBlocks;
+	for (int i = 3; i < 9; i++) {
+		if (std::pow(2, i) >= size) {
+			blockSize = std::pow(2, i);
+			numOfBlocks = blockSize / 8;
+			break;
+		}
+	}
 
-    int firstBlock = size/8;
+    int firstBlock = ramAddr/8;
 
     for (int i = firstBlock; i < numOfBlocks+firstBlock; i++) {
         blocks[i] = 0;
@@ -178,6 +192,7 @@ std::string Ram::readMessage(int ramAddr) {
             ram[i*8+j] = ' ';
         }
     }
+	//printAllRam();
     return msg;
 }
 
@@ -188,17 +203,111 @@ std::string Ram::readMessage(int ramAddr) {
  * Does the same for segment 1 but before it, updates segment 1 if PCB state is WAITING.
  * 
  * @param pcb Pointer to PCB needed to get data's size, physical address.
+ * @return true for success or false for failure.
  */
 bool Ram::deleteFromRam(PCB* pcb) {
-    if (!pcb->segTab[0]->vi && !pcb->segTab[1]->vi) return 0;
-    //segment 0
-    int numOfBlocks;
-    int num1 = pcb->segTab[0]->limit/8;
-    int num2 = pcb->segTab[0]->limit%8;
-    if (num2==0) numOfBlocks = num1;
-    else numOfBlocks = num1+1;
 
-    int firstBlock = pcb->segTab[0]->baseRAM/8;
+	//segment 0
+	int blockSize;
+	int numOfBlocks;
+	for (int i = 3; i < 9; i++) {
+		if (std::pow(2, i) >= pcb->segTab[0]->limit) {
+			blockSize = std::pow(2, i);
+			numOfBlocks = blockSize / 8;
+			break;
+		}
+	}
+
+	int firstBlock = pcb->segTab[0]->baseRAM / 8;
+
+	for (int i = firstBlock; i < numOfBlocks + firstBlock; i++) {
+		blocks[i] = 0;
+		for (int j = 0; j < 8; j++) {
+			ram[i * 8 + j] = ' ';
+		}
+	}
+	//segment 1
+	if (pcb->segTab.size() == 2) {
+		for (int i = 3; i < 9; i++) {
+			if (std::pow(2, i) >= pcb->segTab[1]->limit) {
+				blockSize = std::pow(2, i);
+				numOfBlocks = blockSize / 8;
+				break;
+			}
+		}
+
+		firstBlock = pcb->segTab[1]->baseRAM / 8;
+
+
+		//update
+		if (pcb->getState() == WAITING) {
+			std::string bytes;
+			for (int i = firstBlock; i < numOfBlocks + firstBlock; i++) {
+				for (int j = 0; j < 8; j++) {
+					bytes.push_back(i * 8 + j);
+				}
+			}
+			System::VM.loadToVM(pcb, bytes);
+		}
+
+		//segment 1
+		for (int i = firstBlock; i < numOfBlocks + firstBlock; i++) {
+			blocks[i] = 0;
+			for (int j = 0; j < 8; j++) {
+				ram[i * 8 + j] = ' ';
+			}
+		}
+		pcb->segTab[1]->vi = 0;
+	}
+	pcb->segTab[0]->vi = 0;
+	return 1;
+}
+
+/**
+* Clears RAM.
+*
+* Deletes both segments of every process from RAM.
+*
+* @return true for success or false for failure.
+*/
+bool Ram::clearRam() {
+    std::map<std::string, PCB*>* map = PCB::getProcessMapPointer();
+    for (auto x : *map) {
+        deleteFromRam(x.second);
+    }  
+    return 1;
+}
+
+/**
+* Deletes message from RAM.
+*
+* Deletes message saved in RAM.
+*
+* @param ramAddr Int meaning physical address in RAM where the message begins.
+* @return true for success or false for failure.
+*/
+bool Ram::deleteMessage(int ramAddr) {
+    int space = 0;
+    int size = 0;
+    int i = ramAddr;
+
+    while (space != 2) {
+        if (ram[i] == ' ') space++;
+        size++;
+        i++;
+    }
+
+	int blockSize;
+	int numOfBlocks;
+	for (int i = 3; i < 9; i++) {
+		if (std::pow(2, i) >= size) {
+			blockSize = std::pow(2, i);
+			numOfBlocks = blockSize / 8;
+			break;
+		}
+	}
+
+	int firstBlock = ramAddr / 8;
 
     for (int i = firstBlock; i < numOfBlocks+firstBlock; i++) {
         blocks[i] = 0;
@@ -206,37 +315,6 @@ bool Ram::deleteFromRam(PCB* pcb) {
             ram[i*8+j] = ' ';
         }
     }
-    //segment 1
-    num1 = pcb->segTab[1]->limit/8;
-    num2 = pcb->segTab[1]->limit%8;
-    if (num2==0) numOfBlocks = num1;
-    else numOfBlocks = num1+1;
-
-    firstBlock = pcb->segTab[1]->baseRAM/8;
-
-    //update
-    if (pcb->getState() == WAITING) {
-        std::string bytes;
-        for (int i = firstBlock; i < numOfBlocks+firstBlock; i++) {
-            for (int j = 0; j < 8; j++) {
-                bytes.push_back(i*8+j);
-            }
-        }
-		System::VM.loadToVM(pcb, bytes);
-    }
-
-    //segment 1
-    for (int i = firstBlock; i < numOfBlocks+firstBlock; i++) {
-        blocks[i] = 0;
-        for (int j = 0; j < 8; j++) {
-            ram[i*8+j] = ' ';
-        }
-    }
-    if(ramSem.value_sem() <= 0){
-        if(ramSem.signal_sem());
-    }
-    pcb->segTab[0]->vi = 1;
-    pcb->segTab[1]->vi = 1;
     return 1;
 }
 
@@ -267,54 +345,218 @@ bool Ram::isInRam(PCB* pcb, int segment) {
     return pcb->segTab[segment]->vi;
 }
 
+/**
+ * Prints whole RAM.
+ * 
+ * Prints all content of RAM. 8 characters in every line.
+ */
 void Ram::printAllRam() {
-    std::cout << "RAM" << std::endl;
-    for (int i = 0; i < 512; i++) {
-        std::cout << i << "   " << ram[i] << std::endl;
-    }
-}
-
-void Ram::printRam(int start, int stop) {
-   std::cout << "RAM from " << start << " to " << stop << std::endl;
-    for (int i = start; i < stop+1; i++) {
-        std::cout << i << "   " << ram[i] << std::endl;
-    } 
-}
-
-void Ram::printProcess(std::string pid) {
-	PCB* pcb = PCB::getPCB(pid);
-	std::cout << pid << std::endl;
-	if (isInRam(pcb, 0)) {
-		std::cout << "Segment text" << std::endl;
-		for (int i = pcb->segTab[0]->baseRAM; i < pcb->segTab[0]->baseRAM + pcb->segTab[0]->limit; i++) {
-			std::cout << i << "   " << ram[i] << std::endl;
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "|||||||||||||||| RAM ||||||||||||||||" << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << std::endl;
+	for (int i = -1; i < 8; i++) {
+		if (i == -1) std::cout << "       ";
+		else std::cout << i << "   ";
+	}
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	for (int i = 0; i < 64; i++) {
+		for (int j = -1; j < 8; j++) {
+			if (j == -1) {
+				if (i*8 < 10)
+				std::cout << i*8 << "   |  ";
+				else if (i*8 < 100)
+					std::cout << i*8 << "  |  ";
+				else
+					std::cout << i * 8 << " |  ";
+			}
+			else std::cout << ram[i*8 + j] << "   ";
 		}
 		std::cout << std::endl;
 	}
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << std::endl;
+}
+
+/**
+ * Prints precised section of RAM.
+ * 
+ * Prints content of RAM from specified first element to last element. 8 characters in every line.
+ * 
+ * @param start Int specifing the first displayed element.
+ * @param stop Int specifing the last displayed element.
+ */
+void Ram::printRam(int start, int stop) {
+
+	int st = start / 8;
+	int sp = stop / 8;
+	if (stop % 8 != 0) sp++;
+
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "||||||||| RAM FROM " <<start << " TO " << stop << " |||||||||" << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << std::endl;
+	for (int i = -1; i < 8; i++) {
+		if (i == -1) std::cout << "       ";
+		else std::cout << i << "   ";
+	}
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	for (int i = st; i < sp; i++) {
+		for (int j = -1; j < 8; j++) {
+			if (j == -1) {
+				if (i * 8 < 10)
+					std::cout << i * 8 << "   |  ";
+				else if (i * 8 < 100)
+					std::cout << i * 8 << "  |  ";
+				else
+					std::cout << i * 8 << " |  ";
+			}
+			else std::cout << ram[i * 8 + j] << "   ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << std::endl;
+
+}
+
+/**
+ * Prints content of process in RAM.
+ * 
+ * Prints segments of process saved in RAM. 8 characters in every line.
+ * 
+ * @param pid String specifing the pid of process to display.
+ */
+void Ram::printProcess(std::string pid) {
+	PCB* pcb = PCB::getPCB(pid);
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "||||||||| PROCESS " << pid << " IN RAM |||||||||" << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << std::endl;
+
+	int start;
+	int stop;
+
+	if (isInRam(pcb, 0)) {
+		start = pcb->segTab[0]->baseRAM / 8;
+		stop = (pcb->segTab[0]->baseRAM + pcb->segTab[0]->limit) / 8;
+		if ((pcb->segTab[0]->baseRAM + pcb->segTab[0]->limit) % 8 != 0) stop++;
+		std::cout << "-------------------------------------" << std::endl;
+		std::cout << "|||||||||||| SEGMENT TEXT |||||||||||" << std::endl;
+		std::cout << "-------------------------------------" << std::endl;
+		for (int i = -1; i < 8; i++) {
+			if (i == -1) std::cout << "       ";
+			else std::cout << i << "   ";
+		}
+		std::cout << std::endl;
+		std::cout << "-------------------------------------" << std::endl;
+		for (int i = start; i < stop; i++) {
+			for (int j = -1; j < 8; j++) {
+				if (j == -1) {
+					if (i * 8 < 10)
+						std::cout << i * 8 << "   |  ";
+					else if (i * 8 < 100)
+						std::cout << i * 8 << "  |  ";
+					else
+						std::cout << i * 8 << " |  ";
+				}
+				else std::cout << ram[i * 8 + j] << "   ";
+			}
+			std::cout << std::endl;
+		}
+
+	}
 	if (pcb->segTab.size() == 2) {
 		if (isInRam(pcb, 1)) {
-			std::cout << "Segment data" << std::endl;
-			for (int i = pcb->segTab[1]->baseRAM; i < pcb->segTab[1]->baseRAM + pcb->segTab[1]->limit; i++) {
-				std::cout << i << "   " << ram[i] << std::endl;
+			start = pcb->segTab[1]->baseRAM / 8;
+			stop = (pcb->segTab[1]->baseRAM + pcb->segTab[1]->limit) / 8;
+			if ((pcb->segTab[1]->baseRAM + pcb->segTab[1]->limit) % 8 != 0) stop++;
+			std::cout << "-------------------------------------" << std::endl;
+			std::cout << "|||||||||||| SEGMENT DATA ||||||||||||" << std::endl;
+			std::cout << "-------------------------------------" << std::endl;
+			for (int i = -1; i < 8; i++) {
+				if (i == -1) std::cout << "       ";
+				else std::cout << i << "   ";
 			}
+			std::cout << std::endl;
+			std::cout << "-------------------------------------" << std::endl;
+			for (int i = start; i < stop; i++) {
+				for (int j = -1; j < 8; j++) {
+					if (j == -1) {
+						if (i * 8 < 10)
+							std::cout << i * 8 << "   |  ";
+						else if (i * 8 < 100)
+							std::cout << i * 8 << "  |  ";
+						else
+							std::cout << i * 8 << " |  ";
+					}
+					else std::cout << ram[i * 8 + j] << "   ";
+				}
+				std::cout << std::endl;
+			}
+			std::cout << std::endl;
 		}
 	}
 }
 
+/**
+ * Prints content of segment in RAM.
+ * 
+ * Prints specified segment of process saved in RAM. 8 characters in every line.
+ * 
+ * @param pid String specifing the pid of process to display.
+ * @param segment Int specifing VM segment to display: 0 for text, 1 for data.
+ */
 void Ram::printSegment(std::string pid, int segment) {
 	PCB* pcb = PCB::getPCB(pid);
-	if (segment == 1 && pcb->segTab.size() == 2) {
+
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "|||| PROCESS " << pid << " SEGMENT " << segment << " IN RAM ||||" << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+
 		if (isInRam(pcb, segment)) {
-			std::cout << pid << std::endl;
-			if (segment == 0) std::cout << "Segment text" << std::endl;
-			else if (segment == 1) std::cout << "Segment data" << std::endl;
-			for (int i = pcb->segTab[segment]->baseRAM; i < pcb->segTab[segment]->baseRAM + pcb->segTab[segment]->limit; i++) {
-				std::cout << i << "   " << ram[i] << std::endl;
+			int start = pcb->segTab[segment]->baseRAM / 8;
+			int stop = (pcb->segTab[segment]->baseRAM + pcb->segTab[segment]->limit) / 8;
+			if ((pcb->segTab[segment]->baseRAM + pcb->segTab[segment]->limit) % 8 != 0) stop++;
+			for (int i = -1; i < 8; i++) {
+				if (i == -1) std::cout << "       ";
+				else std::cout << i << "   ";
 			}
+			std::cout << std::endl;
+			std::cout << "-------------------------------------" << std::endl;
+			for (int i = start; i < stop; i++) {
+				for (int j = -1; j < 8; j++) {
+					if (j == -1) {
+						if (i * 8 < 10)
+							std::cout << i * 8 << "   |  ";
+						else if (i * 8 < 100)
+							std::cout << i * 8 << "  |  ";
+						else
+							std::cout << i * 8 << " |  ";
+					}
+					else std::cout << ram[i * 8 + j] << "   ";
+				}
+				std::cout << std::endl;
+			}
+			std::cout << std::endl;
 		}
-	}
 }
 
+/**
+ * Prints message saved in RAM.
+ * 
+ * Prints message which starts at specified physical address.
+ * 
+ * @param ramAddr Int meaning physical address in RAM where the message begins.
+ */
 void Ram::printMessage(int ramAddr) {
     int space = 0;
     int i = ramAddr;
@@ -322,12 +564,10 @@ void Ram::printMessage(int ramAddr) {
     while (space != 2) {
         if (ram[i] == ' ') space++;
         if(space==2) return;
-        std::cout << i << "   " << ram[i] << std::endl;
+        //std::cout << i << "   " << ram[i] << std::endl;
+		std::cout << ram[i];
         i++;
     }
-}
-
-void Ram::printSemaphore() {
-    ramSem.print_value();
-    ramSem.print_queue();
+	std::cout << std::endl;
+	std::cout << std::endl;
 }

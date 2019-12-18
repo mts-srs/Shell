@@ -37,9 +37,9 @@ void CommunicationState::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/stepHover.png", "Resources/Images/stepClicked.png");
 
-	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logoHover.png", "Resources/Images/logoClicked.png");
 
 	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
 	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
@@ -171,19 +171,25 @@ void CommunicationState::updateButtons()
 	if (this->buttons["SHOWMESSAGE"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		this->states->pop();
+		this->states->push(new IPCShowMessageInput(this->window, this->states, this->event));
 	}
 
 	if (this->buttons["SEND"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		this->states->pop();
+		this->states->push(new IPCSendInput(this->window, this->states, this->event));
 	}
 
 	if (this->buttons["RECEIVE"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		this->states->pop();
+		PCB::getPCB(System::CPU.getRunningPID())->receiveMessage();
+	}
+
+	if (this->buttons["STEP"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::CPU.nextStep();
 	}
 
 	//Quiting shell

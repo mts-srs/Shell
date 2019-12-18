@@ -1,4 +1,4 @@
-//Wojtek
+//VoiTee
 #include "Interprocess_Com.hpp"
 #include "Headers.h"
 #include "RAM.hpp"
@@ -9,50 +9,49 @@ Message::Message() {}
 Message::Message(std::string sender, std::string content) {
 	this->pid_sender = sender;
 	this->content = content;
-
-	this->size = content.size(); 
-
-		//this->size = loadToRam() ???czekam na kinie
-
+	this->size = content.size();
 }
 
 
 bool PCB::sendMessage(std::string pid_receiver, std::string content) {
-	//loadToRam
+
 	PCB* receiver = getPCB(pid_receiver);
-	Message temp =	Message(pid_receiver, content);
+	Message temp = Message(this->pid, content);
 
 	if (receiver != nullptr) {
 		receiver->messages.push_back(temp);
 
-		if (!System::RAM.loadToRam(receiver, content, 2)) return false;
+		if (!System::RAM.loadToRam(receiver, prepareMessage(temp), 2)) return false;
 
 	}
 	else return false;
 
-
-
+	//semaphore action
+	if(!receiver->pSem.signal_sem()) return false;
+	else receiver->receiveMessage();
+	
 	return true;
 }
-bool PCB::receiveMessage() {
-	//ReceiveMessage
-	Message received;
-	std::string RAM_string = System::RAM.readMessage(received.RAMadrress);
-	Message RAM_received;
-	//
-	
-	//setting parameters based on RAM
-	(RAM_received).pid_sender.push_back(RAM_string.at(0) + RAM_string.at(1));
-	for (int i = 3; i < RAM_string.size(); i++) {
-		(RAM_received).pid_sender.push_back(RAM_string.at(i));
-	}
-	(RAM_received).size = (RAM_received).content.size();
-	(RAM_received).RAMadrress = (received).RAMadrress;
-	//
 
-	if (!messages.empty()) {
-		received = messages.at(0);
-		(received).content = System::RAM.readMessage((received).RAMadrress);
+
+
+bool PCB::receiveMessage() {
+
+	if (messages.empty()) {
+		//semaphore action
+		if (pSem.wait_sem(this->pid))
+			return true;
+		return false;
+	}
+
+	//trying receivin from PCB
+	Message & received = messages.at(0);
+
+	//getting from RAM
+	Message RAM_received;
+	RAM_received.RAMtoMessage(System::RAM.readMessage(received.RAMadrress));
+	RAM_received.RAMadrress = received.RAMadrress;		
+	received.content = System::RAM.readMessage(received.RAMadrress);
 
 		//comparing if RAM values and object values are similar
 		if (!(received == RAM_received)) return false;
@@ -61,8 +60,8 @@ bool PCB::receiveMessage() {
 		if (!(RAM_received).printMessage()) return false;
 
 		messages.erase(messages.begin());
-	}
-	else return false;
+	
+
 
 	return true;
 }
@@ -70,8 +69,9 @@ bool PCB::receiveMessage() {
 
 bool showMessages(PCB* pcb) {
 
+	if (pcb == nullptr) return false;
 	for (auto mess : pcb->messages) {
-		if(!mess.printMessage()) return false;
+		if (!mess.printMessage()) return false;
 	}
 
 	return true;
@@ -85,6 +85,47 @@ bool Message::printMessage() {
 		"\n ADRES POCZATKU: " << RAMadrress;
 
 	return true;
+}
+
+bool Message::RAMtoMessage(std::string RAMbytes) {
+
+	Message RAM_received;
+	//
+
+	//setting parameters based on RAM
+	(RAM_received).pid_sender.push_back(RAMbytes.at(0) + RAMbytes.at(1));
+	for (int i = 3; i < RAMbytes.size(); i++) {
+		(RAM_received).pid_sender.push_back(RAMbytes.at(i));
+	}
+	(RAM_received).size = (RAM_received).content.size();
+	//(RAM_received).RAMadrress = (received).RAMadrress;
+	//
+
+
+	return true;
+}
+
+bool PCB::deleteMessageRAM() {
+
+	for (auto mess: this->messages) {
+		if (!System::RAM.deleteMessage(mess.RAMadrress)) return false;
+	}
+	return true;
+}
+
+std::string prepareMessage(Message mess) {
+	std::string chain;
+
+	//pid
+	chain.push_back(mess.pid_sender.at(0));
+	chain.push_back(mess.pid_sender.at(1));
+	chain.push_back(' ');
+	//content
+	for (int i = 0; i < mess.size; i++) {
+		chain.push_back(mess.content.at(i));
+	}
+
+	return chain;
 }
 
 bool operator==(Message& m1, Message& m2) {

@@ -37,9 +37,9 @@ void ProcessSchedulingState::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/stepHover.png", "Resources/Images/stepClicked.png");
 
-	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logoHover.png", "Resources/Images/logoClicked.png");
 
 	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
 	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
@@ -52,7 +52,7 @@ void ProcessSchedulingState::initButtons()
 	this->buttons["COMMUNICATION"] = new Button(380, 430, 244, 44, &this->font, "Communication");
 	this->buttons["PROCMANA"] = new Button(380, 480, 244, 44, &this->font, "Processes management");
 
-	this->buttons["PCBQUEUE"] = new Button(630, 300, 244, 44, &this->font, "PCB queue");
+	this->buttons["PCBQUEUE"] = new Button(630, 300, 244, 44, &this->font, "Ready queue");
 	this->buttons["RUNNING"] = new Button(630, 400, 244, 44, &this->font, "Running");
 }
 
@@ -177,6 +177,12 @@ void ProcessSchedulingState::updateButtons()
 	{
 		isMousePressed = true;
 		System::CPU.displayRunning();
+	}
+
+	if (this->buttons["STEP"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::CPU.nextStep();
 	}
 
 	//Quiting shell

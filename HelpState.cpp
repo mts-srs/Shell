@@ -10,7 +10,7 @@ void HelpState::initBackground()
 		)
 	);
 
-	this->texture.loadFromFile("Resources/images/MMBackground.png");
+	this->texture.loadFromFile("Resources/images/helpLAYOUT.png");
 	this->background.setTexture(&texture);
 }
 
@@ -26,8 +26,7 @@ void HelpState::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
-
+	this->buttons["BACK"] = new Button(480, 700, 41, 41, &this->font, "", "Resources/Images/back.png", "Resources/Images/backHover.png", "Resources/Images/backClicked.png");
 
 }
 
@@ -77,8 +76,17 @@ void HelpState::updateButtons()
 		it.second->update(this->mousePosView);
 	}
 
-	//Quiting shell
+	if (this->buttons["BACK"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
 
+	//Quiting shell
+	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
+	{
+		this->window->close();
+	}
 }
 
 void HelpState::updateTimebar()

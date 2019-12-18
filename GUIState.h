@@ -10,6 +10,7 @@
 #include <stack>
 #include <vector>
 #include <map>
+#include <exception>
 
 extern bool isMousePressed;
 

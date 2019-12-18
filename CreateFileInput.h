@@ -12,7 +12,7 @@ class CreateFileInput :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Type name, file, priority");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Type name");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

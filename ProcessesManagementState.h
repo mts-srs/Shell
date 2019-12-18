@@ -4,6 +4,7 @@
 #include "Timebar.h"
 #include "HelpState.h"
 #include "PCBInput.h"
+#include "PCBSemInput.h"
 
 extern bool isMousePressed;
 
@@ -13,7 +14,7 @@ class ProcessesManagementState :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Processes Management");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

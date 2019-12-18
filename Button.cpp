@@ -11,6 +11,8 @@ Button::Button(float x, float y, float width, float height, sf::Font * font, std
 	this->text.setFont(*this->font);
 	this->text.setString(text);
 	this->text.setFillColor(sf::Color::White);
+	this->text.setOutlineColor(sf::Color::Black);
+	this->text.setOutlineThickness(5);
 	this->text.setCharacterSize(20);
 	this->text.setPosition(
 		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f +22,
@@ -33,6 +35,8 @@ Button::Button(float x, float y, float width, float height, sf::Font * font, std
 	this->text.setFont(*this->font);
 	this->text.setString(text);
 	this->text.setFillColor(sf::Color::White);
+	this->text.setOutlineColor(sf::Color::Black);
+	this->text.setOutlineThickness(2);
 	this->text.setCharacterSize(20);
 	this->text.setPosition(
 		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f + 22,
@@ -67,16 +71,18 @@ void Button::update(const sf::Vector2f mousePos)
 {
 	//Idle
 	this->buttonState = BTN_IDLE;
+	this->text.setFillColor(sf::Color::White);
 
 	//Hover
 	if (this->shape.getGlobalBounds().contains(mousePos)) 
 	{
 		this->buttonState = BTN_HOVER;
-
+		this->text.setFillColor(sf::Color(179.f, 179.f, 179.f));
 		//Pressed
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			this->buttonState = BTN_ACTIVE;
+			this->text.setFillColor(sf::Color(233.f, 175.f, 175.f));
 		}
 	}
 

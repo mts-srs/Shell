@@ -12,7 +12,7 @@ class ProcessSchedulingState :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Process scheduling");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

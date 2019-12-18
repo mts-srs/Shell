@@ -3,6 +3,8 @@
 #include "Button.h"
 #include "Timebar.h"
 #include "HelpState.h"
+#include "IPCSendInput.h"
+#include "IPCShowMessageInput.h"
 
 extern bool isMousePressed;
 
@@ -12,7 +14,7 @@ class CommunicationState :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "IPC");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

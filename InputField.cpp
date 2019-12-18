@@ -95,7 +95,9 @@ void InputField::update()
 				time = 0;
 			}
 			else if (event->text.unicode < 128 && event->text.unicode > 10) {
-				input += event->text.unicode;
+				if (input.size() < 64) {
+					input += event->text.unicode;
+				}
 				clock.restart();
 				time = 0;
 			}

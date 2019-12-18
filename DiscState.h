@@ -14,7 +14,7 @@ class DiscState :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Drive");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Disc");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

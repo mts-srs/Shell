@@ -12,13 +12,17 @@ TimeBar::TimeBar(float width, float height, sf::Font * font, std::string text)
 	this->text1.setString(text);
 	this->text1.setFillColor(sf::Color::White);
 	this->text1.setCharacterSize(20);
-	this->text1.setPosition(25, 25);
+	this->text1.setPosition(25, 20);
+	this->text1.setOutlineColor(sf::Color::Black);
+	this->text1.setOutlineThickness(2);
 
 	this->text2.setFont(*this->font);
 	this->text2.setString(this->actualTime);
 	this->text2.setFillColor(sf::Color::White);
 	this->text2.setCharacterSize(20);
-	this->text2.setPosition(405, 25);
+	this->text2.setPosition(405, 20);
+	this->text2.setOutlineColor(sf::Color::Black);
+	this->text2.setOutlineThickness(2);
 }
 
 TimeBar::~TimeBar()

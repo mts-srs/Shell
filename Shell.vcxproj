@@ -165,6 +165,8 @@
     <ClCompile Include="InputField.cpp" />
     <ClCompile Include="Interperter.cpp" />
     <ClCompile Include="Interprocess_Com.cpp" />
+    <ClCompile Include="IPCSendInput.cpp" />
+    <ClCompile Include="IPCShowMessageInput.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="OverwriteFileInput.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="PCBInput.cpp" />
     <ClCompile Include="PCBSegmentsInput.cpp" />
     <ClCompile Include="PCBSegTabInput.cpp" />
+    <ClCompile Include="PCBSemInput.cpp" />
     <ClCompile Include="ProcessesManagementState.cpp" />
     <ClCompile Include="ProcessSchedulingState.cpp" />
     <ClCompile Include="ProgramsState.cpp" />
@@ -212,6 +215,8 @@
     <ClInclude Include="InputField.h" />
     <ClInclude Include="Interpreter.hpp" />
     <ClInclude Include="Interprocess_Com.hpp" />
+    <ClInclude Include="IPCSendInput.h" />
+    <ClInclude Include="IPCShowMessageInput.h" />
     <ClInclude Include="jumps.hpp" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="OverwriteFileInput.h" />
@@ -219,6 +224,7 @@
     <ClInclude Include="PCBInput.h" />
     <ClInclude Include="PCBSegmentsInput.h" />
     <ClInclude Include="PCBSegTabInput.h" />
+    <ClInclude Include="PCBSemInput.h" />
     <ClInclude Include="ProcessesManagementState.h" />
     <ClInclude Include="ProcessSchedulingState.h" />
     <ClInclude Include="ProgramsState.h" />

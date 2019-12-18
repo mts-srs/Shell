@@ -9,6 +9,7 @@ private:
 	//Variables
 	sf::RenderWindow *window;
 	sf::Event sfevent;
+	sf::Image image;
 
 	sf::Clock dtClock;
 	float dt;

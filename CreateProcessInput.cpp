@@ -34,9 +34,9 @@ void CreateProcessInput::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/stepHover.png", "Resources/Images/stepClicked.png");
 
-	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logoHover.png", "Resources/Images/logoClicked.png");
 
 	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
 	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
@@ -89,10 +89,12 @@ void CreateProcessInput::update(const float& dt)
 		this->updateInput();
 	}
 	else {
-		for (auto e : input.vec) {
-			std::cout << e << std::endl;
+		try {
+			PCB::createProcess(input.vec.at(0), input.vec.at(1), stoi(input.vec.at(2)));
 		}
-		PCB::createProcess(input.vec.at(0), input.vec.at(1), stoi(input.vec.at(2)));
+		catch (std::exception e) {
+			std::cout << "INPUT ERROR \n\n";
+		}
 		this->states->pop();
 	}
 }
@@ -144,6 +146,12 @@ void CreateProcessInput::updateButtons()
 	{
 		isMousePressed = true;
 		this->states->push(new HelpState(this->window, this->states, this->event));
+	}
+
+	if (this->buttons["STEP"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::CPU.nextStep();
 	}
 
 	//Quiting shell

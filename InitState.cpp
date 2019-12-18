@@ -26,10 +26,9 @@ void InitState::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/stepHover.png", "Resources/Images/stepClicked.png");
 
-
-	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "","Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "","Resources/Images/logo.png", "Resources/Images/logoHover.png", "Resources/Images/logoClicked.png");
 	
 }
 
@@ -90,6 +89,12 @@ void InitState::updateButtons()
 		this->states->push(new MainMenuState(this->window, this->states, this->event));
 	}
 
+	if (this->buttons["STEP"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		System::CPU.nextStep();
+	}
+
 	//Quiting shell
 	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
 	{
@@ -122,7 +127,7 @@ void InitState::render(sf::RenderTarget* target)
 	this->renderButtons(target);
 
 	//Only for tests, remove later
-	/*//Only for tests, remove later
+	/*
 	sf::Text mouseText;
 	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 50);
 	mouseText.setFont(this->font);

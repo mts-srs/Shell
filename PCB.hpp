@@ -47,10 +47,10 @@ public:
 	
 	//Changing state inner function
 	//todo calling running
-	void setTerminated() { if (state == RUNNING) this->state = TERMINATED; }
-	void setReady() { if (state == WAITING || state == RUNNING) this->state = READY; }
-	void setWaiting() { if (state == RUNNING || state == READY) this->state = WAITING; }
-	void setRunning() { if (state == READY) this->state = RUNNING; }
+	void setTerminated();
+	void setReady();
+	void setWaiting();
+	void setRunning();
 
 	//PID
 	std::string getPid() { return this->pid; }
@@ -103,6 +103,7 @@ public:
 	static void printPCB(std::string pid);
 	static void printMap();
 	static void printReadyQueue();
+	static void printSemQueue(std::string pid);
 
 	//To IPC work
 
@@ -110,5 +111,5 @@ public:
 
 	bool sendMessage(std::string pid_receiver, std::string content);
 	bool receiveMessage();
-
+	bool deleteMessageRAM();
 };

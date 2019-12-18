@@ -15,7 +15,7 @@ class RAMState :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Virtual Memory");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "RAM");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;

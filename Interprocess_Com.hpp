@@ -1,11 +1,11 @@
 #pragma once
-//Wojtek
-
-//Mateusz jak cos to wszystkie couty mozesz zmienic na te swoje SFMLowe okienka nara
+//VoiTee
 
 #include <algorithm>
 #include <exception>
 #include <string>
+
+class PCB;
 
 struct messageNotFound : public std::exception
 {
@@ -23,6 +23,14 @@ struct receiverNotFound : public std::exception
 	}
 };
 
+struct RAMreadingError : public std::exception
+{
+	const char* what() const throw ()
+	{
+		return "Error while reading RAM";
+	}
+};
+
 class Message {
 public:
 	std::string pid_sender;
@@ -33,13 +41,17 @@ public:
 
 	Message();
 	Message(std::string sender, std::string content);
-	~Message() {}
 
 	//ReadMessage
 	//LoadToRam
 
 	bool printMessage();
-
+	bool RAMtoMessage(std::string RAMbytes);
 };
+
+
+
+bool showMessages(PCB* pcb);
+std::string prepareMessage(Message mess);
 
 bool operator==(Message& m1, Message& m2);

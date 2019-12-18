@@ -37,9 +37,9 @@ void RAMProcessInput::initButtons()
 {
 	this->buttons["HELP"] = new Button(900, 0, 29, 50, &this->font, "", "Resources/Images/help.png", "Resources/Images/helpMoused.png", "Resources/Images/helpClicked.png");
 	this->buttons["EXIT"] = new Button(950, 0, 44, 50, &this->font, "", "Resources/Images/quit.png", "Resources/Images/quitHover.png", "Resources/Images/quitHover.png");
-	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/step.png", "Resources/Images/step.png");
+	this->buttons["STEP"] = new Button(457, 700, 85, 85, &this->font, "", "Resources/Images/step.png", "Resources/Images/stepHover.png", "Resources/Images/stepClicked.png");
 
-	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logo.png", "Resources/Images/logo.png");
+	this->buttons["LOGO"] = new Button(0, 300, 127, 151, &this->font, "", "Resources/Images/logo.png", "Resources/Images/logoHover.png", "Resources/Images/logoClicked.png");
 
 	this->buttons["PROGRAMS"] = new Button(130, 250, 244, 44, &this->font, "Programs");
 	this->buttons["FILE_MANAGER"] = new Button(130, 350, 244, 44, &this->font, "File manager");
@@ -52,12 +52,11 @@ void RAMProcessInput::initButtons()
 	this->buttons["COMMUNICATION"] = new Button(380, 430, 244, 44, &this->font, "Communication");
 	this->buttons["PROCMANA"] = new Button(380, 480, 244, 44, &this->font, "Processes management");
 
-	this->buttons["ALLRAM"] = new Button(630, 230, 244, 44, &this->font, "Whole RAM");
-	this->buttons["RAM1"] = new Button(630, 280, 244, 44, &this->font, "RAM in range");
-	this->buttons["PROCESS"] = new Button(630, 330, 244, 44, &this->font, "Process in RAM");
-	this->buttons["SEGMENT"] = new Button(630, 380, 244, 44, &this->font, "Segment in RAM");
-	this->buttons["MESSAGE"] = new Button(630, 430, 244, 44, &this->font, "Message in RAM");
-	this->buttons["SEMAPHORE"] = new Button(630, 480, 244, 44, &this->font, "Semaphore in RAM");
+	this->buttons["ALLRAM"] = new Button(630, 250, 244, 44, &this->font, "Whole RAM");
+	this->buttons["RAM1"] = new Button(630, 300, 244, 44, &this->font, "RAM in range");
+	this->buttons["PROCESS"] = new Button(630, 350, 244, 44, &this->font, "Process in RAM");
+	this->buttons["SEGMENT"] = new Button(630, 400, 244, 44, &this->font, "Segment in RAM");
+	this->buttons["MESSAGE"] = new Button(630, 450, 244, 44, &this->font, "Message in RAM");
 }
 
 RAMProcessInput::RAMProcessInput(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
@@ -209,10 +208,10 @@ void RAMProcessInput::updateButtons()
 		this->states->pop();
 	}
 
-	if (this->buttons["SEMAPHORE"]->isPressed() && isMousePressed == false)
+	if (this->buttons["STEP"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		this->states->pop();
+		System::CPU.nextStep();
 	}
 
 	//Quiting shell

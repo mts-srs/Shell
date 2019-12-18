@@ -52,9 +52,10 @@ void PCBInput::initButtons()
 	this->buttons["COMMUNICATION"] = new Button(380, 430, 244, 44, &this->font, "Communication");
 	this->buttons["PROCMANA"] = new Button(380, 480, 244, 44, &this->font, "Processes management");
 
-	this->buttons["PCB"] = new Button(630, 250, 244, 44, &this->font, "PCB");
-	this->buttons["READYQUEUE"] = new Button(630, 350, 244, 44, &this->font, "Ready queue");
-	this->buttons["MAP"] = new Button(630, 450, 244, 44, &this->font, "Map");
+	this->buttons["PCB"] = new Button(630, 230, 244, 44, &this->font, "PCB");
+	this->buttons["READYQUEUE"] = new Button(630, 310, 244, 44, &this->font, "Ready queue");
+	this->buttons["MAP"] = new Button(630, 390, 244, 44, &this->font, "Map");
+	this->buttons["SEM"] = new Button(630, 460, 244, 44, &this->font, "Semaphore queue");
 }
 
 PCBInput::PCBInput(sf::RenderWindow *window, std::stack<GUIState*> *states, sf::Event *event)
@@ -190,6 +191,12 @@ void PCBInput::updateButtons()
 	}
 
 	if (this->buttons["MAP"]->isPressed() && isMousePressed == false)
+	{
+		isMousePressed = true;
+		this->states->pop();
+	}
+
+	if (this->buttons["SEM"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
 		this->states->pop();

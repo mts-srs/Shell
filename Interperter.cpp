@@ -92,7 +92,7 @@ bool interprate(PCB *pcb) {
 	else if (command == "WT") //set process as waiting
 	{
 		args = getArgs(pcb, 1, takenBytes);
-		pcb->setCommandCounter(pcb->getCommandCounter() + takenBytes); //FIXME
+		pcb->setCommandCounter(pcb->getCommandCounter() + takenBytes); //FIXME: to nie ma prawa bytu bo nic tego procesu nie obudzi
 		return PCB::haltProcess(args[0]);
 	}
 	else if (command == "CP")
@@ -160,15 +160,28 @@ bool interprate(PCB *pcb) {
 		args = getArgs(pcb, 2, takenBytes);
 		ret = System::FS.writeToFile(args[0], args[1]);
 	}
+	// SEMAFORY
+
+	else if (command == "SW")
+	{
+		args = getArgs(pcb, 1, takenBytes);
+		for (int i = 0; i < System::FS.maincatalogue.size(); i++)
+		{
+			if (System::FS.maincatalogue[i].name == args[0]) {
+				System::FS.maincatalogue[i].sem.wait_sem(pcb->getPid());
+			}
+		}
+		ret = 1;
+	}
 
 	if (!IC)
 		pcb->setCommandCounter(pcb->getCommandCounter() + takenBytes);
 
-	std::cout << "Command: " << command;
+	/*std::cout << "Command: " << command;
 	for (auto v : args) {
 		std::cout << " " << v;
-	}
-
+	}*/
+	
 	return ret;
 }
 

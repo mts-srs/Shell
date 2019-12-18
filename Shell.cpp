@@ -9,7 +9,7 @@ void Shell::initWindow()
 	bool fullscreen = false;
 	std::string title = "None";
 	unsigned framerate_limit = 60;
-	
+	this->image.loadFromFile("Resources/Images/logo.png");
 
 	if (ifs.is_open()) 
 	{
@@ -24,6 +24,7 @@ void Shell::initWindow()
 	this->window = new sf::RenderWindow(window_bounds, title);
 	this->window->setFramerateLimit(framerate_limit);
 	this->window->setKeyRepeatEnabled(false);
+	this->window->setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
 }
 
 void Shell::initStates()
@@ -33,6 +34,9 @@ void Shell::initStates()
 
 Shell::Shell()
 {
+	PCB::createDummy();
+	System::CPU.cpu_sch();
+
 	this->initWindow();
 	this->initStates();
 }

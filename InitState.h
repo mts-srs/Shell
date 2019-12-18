@@ -11,7 +11,7 @@ class InitState :
 {
 private:
 	//variables
-	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "Main menu");
+	TimeBar timebar = TimeBar(1000.f, 50.f, &font, "");
 	sf::Texture texture;
 	sf::Font font;
 	sf::RectangleShape background;
