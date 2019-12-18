@@ -21,7 +21,7 @@ void Shell::initWindow()
 
 	ifs.close();
 
-	this->window = new sf::RenderWindow(window_bounds, title);
+	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close);
 	this->window->setFramerateLimit(framerate_limit);
 	this->window->setKeyRepeatEnabled(false);
 	this->window->setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());

@@ -95,7 +95,7 @@ void InitState::updateButtons()
 	if (this->buttons["EXIT"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		this->quit = true;
+		this->window->close();
 	}
 
 }
