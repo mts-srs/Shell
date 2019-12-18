@@ -93,7 +93,7 @@ void IPCShowMessageInput::update(const float& dt)
 	}
 	else {
 		try {
-			//PCB::get
+			PCB::showMessages(PCB::getPCB(System::CPU.getRunningPID()));
 		}
 		catch (std::exception e) {
 			std::cout << "INPUT ERROR \n\n";

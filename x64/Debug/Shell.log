@@ -1,2 +1,9 @@
-﻿  Shell.cpp
+﻿  FileManagerState.cpp
+  InitState.cpp
+  LoadingState.cpp
+  Main.cpp
+  MainMenuState.cpp
+  ReadInput.cpp
+  Shell.cpp
+  Generating Code...
   Shell.vcxproj -> D:\Users\Mateusz\Desktop\Shell\x64\Debug\Shell.exe

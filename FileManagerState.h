@@ -8,6 +8,7 @@
 #include "RenameFileInput.h"
 #include "WriteFileInput.h"
 #include "OverwriteFileInput.h"
+#include "ReadInput.h"
 
 extern bool isMousePressed;
 

@@ -195,6 +195,9 @@
     <ClCompile Include="LoadingState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="ReadInput.cpp">
+      <Filter>States\Inputs\FileManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shell.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="LoadingState.h">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadInput.h">
+      <Filter>States\Inputs\FileManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

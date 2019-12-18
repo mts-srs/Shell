@@ -159,7 +159,7 @@ void FileManagerState::updateButtons()
 	if (this->buttons["READ"]->isPressed() && isMousePressed == false)
 	{
 		isMousePressed = true;
-		
+		this->states->push(new ReadInput(this->window, this->states, this->event));
 	}
 
 	//Quiting shell

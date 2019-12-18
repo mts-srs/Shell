@@ -185,6 +185,7 @@
     <ClCompile Include="RAMProcessInput.cpp" />
     <ClCompile Include="RAMSegmentInput.cpp" />
     <ClCompile Include="RAMState.cpp" />
+    <ClCompile Include="ReadInput.cpp" />
     <ClCompile Include="RenameFileInput.cpp" />
     <ClCompile Include="Shell.cpp" />
     <ClCompile Include="GUIState.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="RAMProcessInput.h" />
     <ClInclude Include="RAMSegmentInput.h" />
     <ClInclude Include="RAMState.h" />
+    <ClInclude Include="ReadInput.h" />
     <ClInclude Include="Register.hpp" />
     <ClInclude Include="RenameFileInput.h" />
     <ClInclude Include="Shell.h" />
