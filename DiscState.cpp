@@ -76,11 +76,6 @@ DiscState::~DiscState()
 	}
 }
 
-void DiscState::endState()
-{
-
-}
-
 void DiscState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

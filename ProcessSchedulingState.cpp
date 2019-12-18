@@ -72,11 +72,6 @@ ProcessSchedulingState::~ProcessSchedulingState()
 	}
 }
 
-void ProcessSchedulingState::endState()
-{
-
-}
-
 void ProcessSchedulingState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

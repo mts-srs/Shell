@@ -47,11 +47,6 @@ HelpState::~HelpState()
 	}
 }
 
-void HelpState::endState()
-{
-
-}
-
 void HelpState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

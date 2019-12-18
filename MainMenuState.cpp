@@ -56,11 +56,6 @@ MainMenuState::~MainMenuState()
 	}
 }
 
-void MainMenuState::endState()
-{
-
-}
-
 void MainMenuState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

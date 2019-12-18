@@ -73,11 +73,6 @@ IPCSendInput::~IPCSendInput()
 	}
 }
 
-void IPCSendInput::endState()
-{
-
-}
-
 void IPCSendInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

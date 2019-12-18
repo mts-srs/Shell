@@ -66,11 +66,6 @@ ControlPanelState::~ControlPanelState()
 	}
 }
 
-void ControlPanelState::endState()
-{
-
-}
-
 void ControlPanelState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

@@ -68,11 +68,6 @@ OverwriteFileInput::~OverwriteFileInput()
 	}
 }
 
-void OverwriteFileInput::endState()
-{
-
-}
-
 void OverwriteFileInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

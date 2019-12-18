@@ -74,11 +74,6 @@ PCBInput::~PCBInput()
 	}
 }
 
-void PCBInput::endState()
-{
-
-}
-
 void PCBInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

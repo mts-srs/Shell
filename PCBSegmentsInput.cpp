@@ -74,11 +74,6 @@ PCBSegmentsInput::~PCBSegmentsInput()
 	}
 }
 
-void PCBSegmentsInput::endState()
-{
-
-}
-
 void PCBSegmentsInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

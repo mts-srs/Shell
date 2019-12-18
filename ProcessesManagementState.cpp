@@ -74,11 +74,6 @@ ProcessesManagementState::~ProcessesManagementState()
 	}
 }
 
-void ProcessesManagementState::endState()
-{
-
-}
-
 void ProcessesManagementState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

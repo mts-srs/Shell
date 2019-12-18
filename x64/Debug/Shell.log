@@ -1,2 +1,37 @@
-﻿  InputField.cpp
+﻿  CommunicationState.cpp
+  ControlPanelState.cpp
+  CreateFileInput.cpp
+  CreateProcessInput.cpp
+  DeleteFileInput.cpp
+  DeleteProcessInput.cpp
+  DiscBlockInput.cpp
+  DiscQueueInput.cpp
+  DiscState.cpp
+  FileManagerState.cpp
+  HelpState.cpp
+  IPCSendInput.cpp
+  IPCShowMessageInput.cpp
+  InitState.cpp
+  Main.cpp
+  MainMenuState.cpp
+  OverwriteFileInput.cpp
+  PCBInput.cpp
+  PCBSegTabInput.cpp
+  PCBSegmentsInput.cpp
+  Generating Code...
+  Compiling...
+  PCBSemInput.cpp
+  ProcessSchedulingState.cpp
+  ProcessesManagementState.cpp
+  ProgramsState.cpp
+  RAMInput.cpp
+  RAMMessageInput.cpp
+  RAMProcessInput.cpp
+  RAMSegmentInput.cpp
+  RAMState.cpp
+  RenameFileInput.cpp
+  Shell.cpp
+  VMState.cpp
+  WriteFileInput.cpp
+  Generating Code...
   Shell.vcxproj -> D:\Users\Mateusz\Desktop\Shell\x64\Debug\Shell.exe

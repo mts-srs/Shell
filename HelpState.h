@@ -26,7 +26,6 @@ public:
 	virtual ~HelpState();
 
 	//Functions
-	void endState();
 	void updateKeybinds(const float& dt);
 	void update(const float& dt);
 	void updateButtons();

@@ -75,11 +75,6 @@ RAMProcessInput::~RAMProcessInput()
 	}
 }
 
-void RAMProcessInput::endState()
-{
-
-}
-
 void RAMProcessInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

@@ -74,11 +74,6 @@ PCBSegTabInput::~PCBSegTabInput()
 	}
 }
 
-void PCBSegTabInput::endState()
-{
-
-}
-
 void PCBSegTabInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

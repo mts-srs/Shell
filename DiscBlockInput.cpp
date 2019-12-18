@@ -76,11 +76,6 @@ DiscBlockInput::~DiscBlockInput()
 	}
 }
 
-void DiscBlockInput::endState()
-{
-
-}
-
 void DiscBlockInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

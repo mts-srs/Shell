@@ -68,11 +68,6 @@ WriteFileInput::~WriteFileInput()
 	}
 }
 
-void WriteFileInput::endState()
-{
-
-}
-
 void WriteFileInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

@@ -74,11 +74,6 @@ VMState::~VMState()
 	}
 }
 
-void VMState::endState()
-{
-
-}
-
 void VMState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

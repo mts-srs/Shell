@@ -68,11 +68,6 @@ DeleteFileInput::~DeleteFileInput()
 	}
 }
 
-void DeleteFileInput::endState()
-{
-
-}
-
 void DeleteFileInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

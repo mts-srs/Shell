@@ -75,11 +75,6 @@ RAMState::~RAMState()
 	}
 }
 
-void RAMState::endState()
-{
-
-}
-
 void RAMState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

@@ -64,11 +64,6 @@ DeleteProcessInput::~DeleteProcessInput()
 	}
 }
 
-void DeleteProcessInput::endState()
-{
-
-}
-
 void DeleteProcessInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

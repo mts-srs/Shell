@@ -63,11 +63,6 @@ ProgramsState::~ProgramsState()
 	}
 }
 
-void ProgramsState::endState()
-{
-
-}
-
 void ProgramsState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

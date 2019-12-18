@@ -64,11 +64,6 @@ CreateProcessInput::~CreateProcessInput()
 	}
 }
 
-void CreateProcessInput::endState()
-{
-
-}
-
 void CreateProcessInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

@@ -55,11 +55,6 @@ Shell::~Shell()
 
 //Functions
 
-void Shell::endApplication()
-{
-	std::cout << "Ending application";
-}
-
 void Shell::updateDt()
 {
 	this->dt = this->dtClock.restart().asSeconds();
@@ -83,13 +78,11 @@ void Shell::update()
 
 		if (this->states.top()->getQuit()) 
 		{
-			this->states.top()->endState();
 			delete this->states.top();
 			this->states.pop();
 		}
 	}
 	else {
-		this->endApplication();
 		this->window->close();
 	}
 }

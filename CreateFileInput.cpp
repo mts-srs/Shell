@@ -68,11 +68,6 @@ CreateFileInput::~CreateFileInput()
 	}
 }
 
-void CreateFileInput::endState()
-{
-
-}
-
 void CreateFileInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

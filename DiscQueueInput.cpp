@@ -76,11 +76,6 @@ DiscQueueInput::~DiscQueueInput()
 	}
 }
 
-void DiscQueueInput::endState()
-{
-
-}
-
 void DiscQueueInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

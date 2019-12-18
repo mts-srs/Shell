@@ -24,8 +24,6 @@ public:
 	Shell();
 	virtual ~Shell();
 
-	void endApplication();
-
 	//Functions
 	void updateDt();
 	void updateSFMLEvents();

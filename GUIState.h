@@ -37,7 +37,6 @@ public:
 
 	virtual void checkForQuit();
 
-	virtual void endState() = 0;
 	virtual void updateMousePositions();
 	virtual void updateKeybinds(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;

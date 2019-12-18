@@ -67,11 +67,6 @@ FileManagerState::~FileManagerState()
 	}
 }
 
-void FileManagerState::endState()
-{
-
-}
-
 void FileManagerState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

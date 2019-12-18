@@ -73,11 +73,6 @@ IPCShowMessageInput::~IPCShowMessageInput()
 	}
 }
 
-void IPCShowMessageInput::endState()
-{
-
-}
-
 void IPCShowMessageInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

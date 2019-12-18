@@ -68,11 +68,6 @@ RenameFileInput::~RenameFileInput()
 	}
 }
 
-void RenameFileInput::endState()
-{
-
-}
-
 void RenameFileInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

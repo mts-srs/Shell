@@ -74,11 +74,6 @@ PCBSemInput::~PCBSemInput()
 	}
 }
 
-void PCBSemInput::endState()
-{
-
-}
-
 void PCBSemInput::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();

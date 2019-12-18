@@ -48,10 +48,6 @@ InitState::~InitState()
 	}
 }
 
-void InitState::endState()
-{
-
-}
 
 void InitState::updateKeybinds(const float& dt)
 {

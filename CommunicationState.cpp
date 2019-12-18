@@ -73,11 +73,6 @@ CommunicationState::~CommunicationState()
 	}
 }
 
-void CommunicationState::endState()
-{
-
-}
-
 void CommunicationState::updateKeybinds(const float& dt)
 {
 	this->checkForQuit();
